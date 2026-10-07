@@ -1,0 +1,1467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How federal permitting timelines for six representative energy projects compare under current law and the Bipartisan American Affordability and Jobs Act of 2026.">
+<meta property="og:title" content="BAAJA Project Timelines">
+<meta property="og:description" content="How federal permitting timelines for six representative energy projects compare under current law and the Bipartisan American Affordability and Jobs Act of 2026.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23141413'/%3E%3Crect x='6' y='8' width='14' height='4' rx='1.5' fill='%232a78d6'/%3E%3Crect x='10' y='14' width='16' height='4' rx='1.5' fill='%23eda100'/%3E%3Crect x='14' y='20' width='12' height='4' rx='1.5' fill='%23008300'/%3E%3C/svg%3E">
+<title>BAAJA Project Timelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single working column. Controls, then summary, then two Gantt panels on one shared month axis, then table view and sources. */
+:root {
+  --bg: #f6f6f3;
+  --surface: #fcfcfb;
+  --ink: #141413;
+  --ink-2: #52514e;
+  --muted: #7b7a74;
+  --grid: #e4e3dc;
+  --rule: #c9c8bf;
+  --accent: #2a78d6;
+  --accent-wash: rgba(42,120,214,0.10);
+  --c1: #2a78d6; /* lead agency & NEPA */
+  --c2: #eb6834; /* Clean Water Act */
+  --c3: #1baf7a; /* ESA */
+  --c4: #eda100; /* historic preservation */
+  --c5: #e87ba4; /* litigation */
+  --c6: #008300; /* construction */
+  --c7: #4a3aa7; /* other federal and state reviews */
+  --c-dev: #a9a79f; /* developer work, not permitting */
+  --tip-bg: #141413;
+  --tip-ink: #f6f6f3;
+  --tip-ink-2: #c3c2b7;
+  --ring: rgba(20,20,19,0.10);
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-cond: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111110; --surface: #1a1a19; --ink: #f4f3ee; --ink-2: #c3c2b7; --muted: #8f8d86;
+    --grid: #2b2b29; --rule: #3d3d3a; --accent: #3987e5; --accent-wash: rgba(57,135,229,0.16);
+    --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300; --c7: #9085e9; --c-dev: #6e6c66;
+    --tip-bg: #f4f3ee; --tip-ink: #141413; --tip-ink-2: #52514e; --ring: rgba(255,255,255,0.10);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111110; --surface: #1a1a19; --ink: #f4f3ee; --ink-2: #c3c2b7; --muted: #8f8d86;
+  --grid: #2b2b29; --rule: #3d3d3a; --accent: #3987e5; --accent-wash: rgba(57,135,229,0.16);
+  --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300; --c7: #9085e9; --c-dev: #6e6c66;
+  --tip-bg: #f4f3ee; --tip-ink: #141413; --tip-ink-2: #52514e; --ring: rgba(255,255,255,0.10);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 22px; }
+.wrap > * { min-width: 0; }
+@media (max-width: 520px) { .wrap { padding-inline: 16px; } }
+
+header { display: grid; gap: 8px; max-width: 760px; }
+.eyebrow { font-family: var(--font-cond); font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--font-cond); font-weight: 600; font-size: clamp(28px, 4.4vw, 40px); line-height: 1.08; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.lede { margin: 0; color: var(--ink-2); font-size: 16px; max-width: 68ch; }
+.caveat { margin: 0; color: var(--muted); font-size: 13px; max-width: 72ch; }
+.archetype { margin: 0; color: var(--ink-2); font-size: 14px; max-width: 80ch; }
+.archetype b { color: var(--ink); font-weight: 600; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+.control { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.control-label { font-family: var(--font-cond); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.seg { display: inline-flex; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 3px; gap: 3px; flex-wrap: wrap; }
+.seg button { font: 500 14px/1.2 var(--font-sans); color: var(--ink-2); background: transparent; border: 0; border-radius: 6px; padding: 7px 12px; cursor: pointer; }
+.seg button:hover { background: var(--accent-wash); color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.seg button:focus-visible, .bar:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 720px) { .summary { grid-template-columns: 1fr; } }
+.stat { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; padding: 14px 16px; display: grid; gap: 2px; min-width: 0; }
+.stat .k { font-size: 13px; color: var(--ink-2); }
+.stat .v { font-weight: 600; font-size: 28px; line-height: 1.15; }
+.stat .v small { font-size: 14px; font-weight: 500; color: var(--ink-2); }
+.stat .s { font-size: 13px; color: var(--muted); }
+.takeaway { margin: 0; font-size: 16px; max-width: 80ch; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--ink-2); align-items: center; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { display: inline-block; width: 14px; height: 10px; border-radius: 3px; }
+.legend i.win { background: transparent; border: 1px solid var(--muted); position: relative; overflow: hidden; }
+.legend i.win::after { content: ""; position: absolute; inset: 0; background: var(--muted); opacity: .18; }
+
+.panel { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 16px 16px 10px; display: grid; gap: 10px; min-width: 0; }
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; }
+.panel h2 { font-family: var(--font-cond); font-size: 20px; font-weight: 600; margin: 0; }
+.panel .meta { font-size: 13px; color: var(--muted); font-family: var(--font-mono); }
+
+.gantt { display: grid; gap: 0; min-width: 0; }
+.row { display: grid; grid-template-columns: minmax(150px, 30%) minmax(0, 1fr); align-items: center; min-height: 34px; border-top: 1px solid var(--grid); }
+.row:first-of-type { border-top: 0; }
+.lab { font-size: 13px; line-height: 1.25; color: var(--ink); padding: 6px 12px 6px 0; display: flex; gap: 8px; align-items: flex-start; min-width: 0; }
+.lab .sw { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 2px; margin-top: 4px; }
+.track { position: relative; height: 34px; min-width: 0; }
+.gl { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--grid); }
+.axis-row { border-top: 0; min-height: 22px; }
+.axis-row .track { height: 22px; }
+.tick { position: absolute; top: 3px; transform: translateX(-50%); font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tick.first { transform: none; }
+.axis-cap { font-size: 11px; color: var(--muted); font-family: var(--font-cond); letter-spacing: .04em; text-transform: uppercase; padding-top: 3px; }
+
+.bar { position: absolute; top: 7px; height: 13px; border-radius: 4px; border: 0; padding: 0; cursor: pointer; background: var(--c); min-width: 4px; }
+.bar.ghost { top: 24px; height: 5px; border-radius: 2px; background: transparent; box-shadow: inset 0 0 0 1px var(--c); opacity: .75; z-index: 0; }
+.bar.ghost.possible { background: repeating-linear-gradient(135deg, color-mix(in oklab, var(--c) 40%, transparent) 0 2px, transparent 2px 5px); }
+.row.two .track { height: 40px; }
+.bar.lane-a { top: 6px; height: 11px; }
+.bar.lane-b { top: 22px; height: 11px; }
+.bar.lane-b:not(.win):not(.possible) { box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--c) 55%, var(--ink)); }
+.ms.ghost { top: 25px; width: 7px; height: 7px; background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink), 0 0 0 2px var(--surface); opacity: .75; }
+.ms.lane-a { top: 8px; } .ms.lane-b { top: 24px; }
+.ms.baaja.lane-b { background: var(--surface); box-shadow: inset 0 0 0 2px var(--ink), 0 0 0 2px var(--surface); }
+.row.two .ms-lab { top: 4px; }
+.lab em.only { font-style: normal; font-family: var(--font-cond); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.delta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); background: var(--accent-wash); border-radius: 4px; padding: 0 4px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.delta.later { background: color-mix(in oklab, var(--c2) 14%, transparent); }
+.legend .lanekey { gap: 6px; }
+.legend .lanekey i { width: 14px; height: 7px; border-radius: 2px; background: var(--muted); }
+.legend .lanekey i.lb { box-shadow: inset 0 0 0 2px var(--ink); background: color-mix(in oklab, var(--muted) 60%, transparent); margin-left: 10px; }
+.legend .lanekey i.lg { height: 5px; background: transparent; box-shadow: inset 0 0 0 1px var(--muted); }
+.tip .t-reg { font-family: var(--font-cond); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tip-ink-2); }
+.bar:hover { filter: brightness(1.08); box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--c); }
+.bar.win, .bar.possible { background: color-mix(in oklab, var(--c) 16%, transparent); box-shadow: inset 0 0 0 1px var(--c); }
+.bar.possible { background: repeating-linear-gradient(135deg, color-mix(in oklab, var(--c) 30%, transparent) 0 3px, transparent 3px 7px); }
+.bar .clip { position: absolute; right: 6px; top: -1px; font-family: var(--font-mono); font-size: 10px; line-height: 15px; color: var(--ink-2); white-space: nowrap; }
+.bar.lane-a .clip, .bar.lane-b .clip { line-height: 13px; top: -1px; }
+.bar.win.clipped { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.ms { position: absolute; top: 12px; width: 10px; height: 10px; background: var(--ink); transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 0 2px var(--surface); pointer-events: none; }
+.ms-lab { position: absolute; top: 7px; font-size: 11px; line-height: 18px; font-weight: 600; color: var(--ink); background: var(--surface); padding: 0 5px; border-radius: 4px; box-shadow: 0 0 0 1px var(--ring); white-space: nowrap; pointer-events: none; font-family: var(--font-cond); }
+
+@media (max-width: 600px) {
+  .row { grid-template-columns: 1fr; border-top: 1px solid var(--grid); padding-top: 4px; }
+  .lab { padding: 2px 0 0; }
+  .axis-row .lab { display: none; }
+  .tick.minor { display: none; }
+}
+
+.wf-intro { margin: 0; font-size: 14px; color: var(--ink-2); max-width: 80ch; }
+.wf .row { grid-template-columns: minmax(150px, 30%) minmax(0, 1fr) 64px; }
+.wf .lab { flex-direction: column; gap: 1px; }
+.wf .lab .sec { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.wf .val { font-family: var(--font-mono); font-size: 13px; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 8px; }
+.wf .row.total { border-top: 1px solid var(--rule); }
+.wf .row.total .lab, .wf .row.total .val { font-weight: 600; }
+.wf .bar { top: 10px; }
+.wf-notes { display: grid; gap: 4px; }
+.wf-notes p { margin: 0; font-size: 13px; color: var(--muted); max-width: 90ch; }
+.tv-h { font-family: var(--font-cond); font-size: 15px; font-weight: 600; margin: 18px 0 0; }
+@media (max-width: 600px) {
+  .wf .row { grid-template-columns: minmax(0, 1fr) 56px; }
+  .wf .row .lab { grid-column: 1 / -1; }
+}
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); }
+.tabs button { font: 600 15px/1.2 var(--font-cond); letter-spacing: .02em; color: var(--ink-2); background: none; border: 0; border-bottom: 2px solid transparent; padding: 10px 12px; margin-bottom: -1px; cursor: pointer; }
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pane { display: grid; gap: 22px; min-width: 0; }
+.pane[hidden] { display: none; }
+.pane > * { min-width: 0; }
+.data-sec { display: grid; gap: 10px; min-width: 0; }
+.data-sec > h2, .data-sec .notes h2, .notes > div > h2 { font-family: var(--font-cond); font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+ul.tight { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); max-width: 90ch; }
+ul.tight b { color: var(--ink); font-weight: 600; }
+.data-sec a, ul.tight a { color: var(--accent); }
+.note-long { margin: 0; font-size: 14px; color: var(--ink-2); max-width: 90ch; }
+.range .row { grid-template-columns: minmax(150px, 24%) minmax(0, 1fr) 140px; min-height: 52px; }
+.range .row.axis-row { min-height: 22px; }
+.range .track { height: 52px; }
+.range .axis-row .track { height: 22px; }
+.range .lab { flex-direction: column; gap: 1px; }
+.range .lab button { font: 600 14px/1.25 var(--font-sans); color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer; text-align: left; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+.range .lab button:hover { color: var(--accent); text-decoration-color: currentColor; }
+.range .lab button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.range .lab .drv { font-size: 12px; color: var(--muted); line-height: 1.3; }
+.range .val { font-family: var(--font-mono); font-size: 13px; text-align: right; padding-left: 8px; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.range .val .r { color: var(--ink); white-space: nowrap; }
+.range .val .m { color: var(--muted); font: 12px/1.3 var(--font-sans); white-space: nowrap; }
+.rspan { position: absolute; top: 24px; height: 4px; border-radius: 2px; background: color-mix(in oklab, var(--accent) 45%, transparent); pointer-events: none; z-index: 1; }
+.rpt { position: absolute; top: 26px; width: 13px; height: 13px; border-radius: 50%; transform: translate(-50%, -50%); border: 0; padding: 0; cursor: pointer; z-index: 3; }
+.rpt.lo { background: var(--surface); box-shadow: inset 0 0 0 2.5px var(--accent), 0 0 0 2px var(--surface); }
+.rpt.hi { background: var(--accent); box-shadow: 0 0 0 2px var(--surface); }
+.rpt:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.rdot { position: absolute; width: 7px; height: 7px; border-radius: 50%; transform: translate(-50%, -50%); border: 0; padding: 0; cursor: pointer; background: color-mix(in oklab, var(--ink-2) 55%, transparent); z-index: 2; }
+.rdot.pend { background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--ink-2); }
+.rdot:hover, .rdot:focus-visible { background: var(--ink); outline: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--ink); z-index: 4; }
+.legend i.k-lo, .legend i.k-hi, .legend i.k-dot, .legend i.k-pend { border-radius: 50%; }
+.legend i.k-lo { width: 11px; height: 11px; box-shadow: inset 0 0 0 2.5px var(--accent); background: transparent; }
+.legend i.k-hi { width: 11px; height: 11px; background: var(--accent); }
+.legend i.k-dot { width: 7px; height: 7px; background: color-mix(in oklab, var(--ink-2) 55%, transparent); }
+.legend i.k-pend { width: 7px; height: 7px; box-shadow: inset 0 0 0 1.5px var(--ink-2); background: transparent; }
+@media (max-width: 600px) {
+  .range .row { grid-template-columns: minmax(0, 1fr) 112px; }
+  .range .val .m { white-space: normal; font-size: 11px; }
+  .range .row .lab { grid-column: 1 / -1; }
+}
+.tip { position: fixed; z-index: 10; max-width: min(340px, calc(100vw - 32px)); background: var(--tip-bg); color: var(--tip-ink); border-radius: 8px; padding: 10px 12px; font-size: 13px; line-height: 1.45; box-shadow: 0 6px 24px rgba(0,0,0,0.18); pointer-events: none; display: grid; gap: 4px; }
+.tip .t-val { font-weight: 600; font-size: 14px; font-family: var(--font-mono); }
+.tip .t-name { color: var(--tip-ink-2); display: flex; gap: 6px; align-items: center; }
+.tip .t-name i { display: inline-block; width: 12px; height: 2px; border-radius: 1px; }
+.tip .t-src { color: var(--tip-ink-2); font-size: 12px; }
+.tip .t-flag { font-family: var(--font-cond); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tip-ink-2); }
+
+details.tv { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 12px 16px; }
+details.tv summary { cursor: pointer; font-weight: 500; }
+.tscroll { overflow-x: auto; margin-top: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 640px; }
+th, td { text-align: left; vertical-align: top; padding: 7px 10px 7px 0; border-top: 1px solid var(--grid); }
+th { font-family: var(--font-cond); font-weight: 600; color: var(--ink-2); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; border-top: 0; }
+td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.bench { min-width: 720px; }
+table.bench td:first-child { font-weight: 500; white-space: nowrap; }
+table.bench td { font-size: 13px; color: var(--ink-2); }
+table.bench td a { color: var(--accent); }
+@media print { .tip, .controls { display: none !important; } .panel, details.tv { break-inside: avoid; } body { background: #fff; } }
+
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.notes .wide { grid-column: 1 / -1; }
+.notes > div { min-width: 0; }
+@media (max-width: 760px) { .notes { grid-template-columns: 1fr; } }
+.notes h3 { font-family: var(--font-cond); font-size: 16px; font-weight: 600; margin: 0 0 6px; }
+.notes ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); }
+.notes a { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+.site-foot { padding-top: 8px; border-top: 1px solid var(--grid); }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Permitting reform · project timelines</div>
+    <h1>How much sooner under BAAJA?</h1>
+    <p class="lede">Six model projects and 69 real ones, under current law and the Bipartisan American Affordability and Jobs Act of 2026.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Page sections">
+    <button type="button" role="tab" id="tab-charts" aria-controls="pane-charts" aria-selected="true">Charts</button>
+    <button type="button" role="tab" id="tab-data" aria-controls="pane-data" aria-selected="false" tabindex="-1">Assumptions and data</button>
+  </div>
+
+  <div class="pane" id="pane-charts" role="tabpanel" aria-labelledby="tab-charts">
+    <section class="panel" aria-labelledby="h-range">
+      <div class="panel-head"><h2 id="h-range">Months sooner under BAAJA</h2><div class="seg" role="group" aria-label="Measure" id="seg-measure"></div></div>
+      <div class="legend" id="range-legend"></div>
+      <div class="gantt range" id="range" role="list"></div>
+      <p class="caveat" id="range-note"></p>
+    </section>
+
+    <section class="controls" aria-label="Project options">
+      <div class="control">
+        <span class="control-label" id="lbl-project">Project</span>
+        <div class="seg" role="group" aria-labelledby="lbl-project" id="seg-project"></div>
+      </div>
+      <div class="control">
+        <span class="control-label" id="lbl-scenario">Scenario</span>
+        <div class="seg" role="group" aria-labelledby="lbl-scenario" id="seg-scenario"></div>
+      </div>
+      <div class="control">
+        <span class="control-label" id="lbl-regime">Show</span>
+        <div class="seg" role="group" aria-labelledby="lbl-regime" id="seg-regime"></div>
+      </div>
+    </section>
+
+    <p class="archetype" id="archetype"></p>
+    <section class="summary" id="summary" aria-live="polite"></section>
+    <p class="takeaway" id="takeaway"></p>
+    <div class="legend" id="legend"></div>
+
+    <section class="panel" aria-labelledby="h-chart">
+      <div class="panel-head"><h2 id="h-chart"></h2><span class="meta" id="meta-chart"></span></div>
+      <div class="gantt" id="g-chart" role="list"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-wf">
+      <div class="panel-head"><h2 id="h-wf"></h2><span class="meta" id="meta-wf"></span></div>
+      <div class="gantt wf" id="wf" role="list"></div>
+      <div class="wf-notes" id="wf-notes"></div>
+    </section>
+  </div>
+
+  <div class="pane" id="pane-data" role="tabpanel" aria-labelledby="tab-data" hidden>
+    <section class="data-sec">
+      <h2>How to read the charts</h2>
+      <ul class="tight">
+        <li><b>Range chart.</b> Open circles assume agencies already meet today's deadlines; filled circles assume the delays and suits of recent cases. The line between them is the range for each model project.</li>
+        <li><b>Real projects.</b> Each dot applies the bill's limits to a project's recorded dates: the EIS capped at 28 months from the NOI (the 2-year deadline plus a 4-month sponsor suit), the decision at 2 months after the final EIS, and BLM's recorded wait before review at 30 days to answer an application and 4 months to the NOI. Other time is left as recorded, so dots run low where agencies held files without a record and high where sponsors changed projects mid-review. Hollow dots are still under review and use the agency's current schedule. Geothermal has too few recorded reviews to replay.</li>
+        <li><b>Timeline.</b> "Show" picks the regime drawn in full; the other regime appears as a thin outline in the same row. Striped bars are delays that could happen but are not counted. Diamonds mark the federal decision and the in-service date.</li>
+        <li><b>Scenarios.</b> In "Deadlines met" the main review runs the same length under both regimes, isolating the bill's other changes. In "Delays and challenges" reviews run as long as recent cases did; under the bill they run past the deadline until the sponsor's suit forces a decision. Developer work is held equal.</li>
+        <li><b>Time savings by provision.</b> Provisions overlap, so each bar is the provision's average contribution across every order in which they could take effect (a Shapley value), and the bars add up to the total. Tooltips give the months each provision saves alone and added last.</li>
+        <li><b>Not modeled.</b> The odds of a suit: suits followed 28% of large energy and transport EISs finished from 2010 to 2018, about two thirds of solar, half of pipelines, 38% of wind and 31% of transmission (<a href="https://www.elr.info/sites/default/files/files-general/53.10836.pdf" target="_blank" rel="noopener">Bennon and Wilson</a>). Supporters such as FAI's Thomas Hochman expect the limits on court remedies to shorten reviews; the Institute for Progress warns shorter reviews may draw more suits. Interconnection, power contracts and tax credits are also not modeled.</li>
+      </ul>
+    </section>
+
+    <section class="data-sec">
+      <h2 id="h-steps"></h2>
+      <section class="controls" aria-label="Table options">
+        <div class="control"><span class="control-label" id="lbl-project-2">Project</span><div class="seg" role="group" aria-labelledby="lbl-project-2" id="seg-project-2"></div></div>
+        <div class="control"><span class="control-label" id="lbl-scenario-2">Scenario</span><div class="seg" role="group" aria-labelledby="lbl-scenario-2" id="seg-scenario-2"></div></div>
+      </section>
+      <p class="archetype" id="desc-long"></p>
+      <p class="note-long" id="takeaway-long"></p>
+      <div class="tscroll"><table id="table"></table></div>
+      <h3 class="tv-h">Time savings by provision, in months</h3>
+      <div class="tscroll"><table id="wf-table"></table></div>
+      <p class="caveat" id="wf-overlap"></p>
+    </section>
+
+    <section class="data-sec">
+      <h2>Real projects</h2>
+      <p class="caveat">Months sooner to the federal decision if the bill's limits had applied. EIS and decision dates from <a href="https://nepa.gov/sites/default/files/documents/CEQ_EIS_Timeline_Data_2024_1_13_2025.xlsx" target="_blank" rel="noopener">CEQ's EIS timeline data</a> (2010 to 2024), FERC dockets, BLM case records and the Permitting Dashboard (<a href="data/real_project_replays.csv">CSV</a>).</p>
+      <details class="tv"><summary>All 69 projects</summary><div class="tscroll"><table id="replay-table"></table></div></details>
+    </section>
+
+    <section class="data-sec notes">
+      <div>
+        <h2>What current law already does</h2>
+        <ul>
+        <li>Since 2023, NEPA has required an environmental assessment within 1 year and an EIS within 2 years, counted from the earliest of the agency's decision on the level of review, its notice that a right-of-way application is complete, or the notice of intent. Agencies can extend these deadlines after consulting the applicant, and sponsors can already ask a court to enforce them (<a href="https://www.law.cornell.edu/uscode/text/42/4336a" target="_blank" rel="noopener">42 U.S.C. 4336a</a>). A court can set a new deadline of up to 90 days, but the one sponsor suit under this provision we found, over a Montana coal mine's EIS, was dismissed in August 2024 as premature because the deadline had not yet passed (<a href="https://www.courtlistener.com/opinion/10050637/signal-peak-energy-llc-v-haaland/" target="_blank" rel="noopener">Signal Peak v. Haaland</a>); the final EIS and decision came in June 2025, about six months after the deadline the company claimed (<a href="https://www.govinfo.gov/content/pkg/FR-2025-06-09/html/2025-10413.htm" target="_blank" rel="noopener">90 FR</a>). The Institute for Progress finds that the general remedy for agency delay, an unreasonable-delay claim under the APA, almost never succeeds. Most EISs still miss the 2-year mark: BPC found 39% of EISs finished after the 2023 law met it (<a href="https://bipartisanpolicy.org/article/permitting-speeds-up-but-61-of-reviews-are-still-late/" target="_blank" rel="noopener">BPC</a>), and agencies reported only 2 EISs and 153 assessments as missing their deadlines in the law's first two years, a count that treats an extended deadline as met (<a href="https://nepa.gov/sites/default/files/documents/NEPAMissedDeadlinesTransmittaltoCongress.pdf" target="_blank" rel="noopener">CEQ</a>). The bill requires the sponsor's approval for any extension and gives courts 120 days to rule.</li>
+        <li>Since July 2025, a sponsor can pay 125% of the agency's costs to have an EIS finished within 1 year of the notice of intent, or an assessment within 180 days (<a href="https://www.law.cornell.edu/uscode/text/42/4336f" target="_blank" rel="noopener">42 U.S.C. 4336f</a>). The charts do not assume it.</li>
+        <li>CEQ's NEPA regulations were withdrawn in 2025, and agencies now follow their own procedures. Interior adopted interim procedures in July 2025 and final ones effective February 24, 2026 (<a href="https://www.govinfo.gov/content/pkg/FR-2026-02-24/pdf/2026-03708.pdf" target="_blank" rel="noopener">91 FR 8738</a>).</li>
+        <li>In <a href="https://www.law.cornell.edu/supremecourt/text/23-975" target="_blank" rel="noopener">Seven County v. Eagle County</a> (2025), the Supreme Court told courts to defer to agencies on NEPA and said a flawed EIS does not necessarily require vacating the approval.</li>
+        <li>Projects covered by FAST-41 already face a 2-year limit on lawsuits (<a href="https://www.law.cornell.edu/uscode/text/42/4370m-6" target="_blank" rel="noopener">42 U.S.C. 4370m-6</a>). Coverage is narrow: 46 projects had active timetables in March 2026, and 23 of those had been extended, 14 by more than a year (<a href="https://www.permitting.gov/sites/default/files/2026-06/Permitting-Council_FY26Q2-Quarterly-Performance-Report.pdf" target="_blank" rel="noopener">Permitting Council</a>). On the Permitting Dashboard, 20 of 40 FAST-41 wind, solar, transmission and gas pipeline projects that are complete or under review finished, or are now due to finish, more than a month after their original timetable, including 8 of 10 offshore wind projects and all 6 solar projects but none of 9 gas pipelines. Of 15 projects whose agencies gave a reason for a delay, 13 cited internal agency or interagency factors and 3 cited the sponsor (one cited both); reasons are recorded for fewer than 1 in 5 delayed milestones (<a href="data/dashboard_energy_projects.csv">dashboard data compiled for this page</a>).</li>
+        <li>Interior's July 2025 memo requiring Secretary-level review of wind and solar actions, and the capacity-density test in Secretarial Order 3438, were preliminarily enjoined in April 2026 only for members of the plaintiff trade groups (<a href="https://www.crowell.com/en/insights/client-alerts/federal-court-blocks-trump-administration-policies-restricting-wind-and-solar-permitting" target="_blank" rel="noopener">Crowell</a>). Interior has appealed to the First Circuit (<a href="https://www.everycrsreport.com/reports/LSB11453.html" target="_blank" rel="noopener">CRS</a>). A court vacated the January 2025 pause on wind permits in December 2025, and the government dropped its appeal (<a href="https://eelp.law.harvard.edu/federal-court-vacates-wind-energy-authorization-pause/" target="_blank" rel="noopener">Harvard EELP</a>).</li>
+        <li>Wind and solar projects that start construction after July 4, 2026 must be in service by the end of 2027 to claim the main federal tax credits, so none of the wind or solar timelines shown would qualify (<a href="https://www.irs.gov/pub/irs-drop/n-25-42.pdf" target="_blank" rel="noopener">IRS Notice 2025-42</a>).</li>
+      </ul>
+      </div>
+      <div>
+        <h2>Data collected for this page</h2>
+        <ul class="tight">
+          <li><a href="data/real_project_replays.csv">Real-project replays</a>, 69 projects</li>
+          <li><a href="data/ferc_pipelines.csv">FERC dockets</a> for 12 large interstate gas pipelines</li>
+          <li><a href="data/dashboard_energy_projects.csv">Permitting Dashboard schedules</a> for FAST-41 energy projects, and <a href="data/dashboard_energy_milestones.csv">their milestones</a></li>
+          <li><a href="data/blm_case_records.csv">BLM case records</a> for 18 solar, wind and transmission projects</li>
+          <li><a href="data/noaa_consultations.csv">NOAA consultations</a> for 11 Atlantic offshore wind projects</li>
+          <li><a href="data/court_cases.csv">Federal suits over permitting delays</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="data-sec">
+      <h2>How the inputs compare with other analyses</h2>
+      <p class="caveat">No published model estimates months saved per project from deadline enforcement, a 150-day filing limit or remand without vacatur. The per-project figures above are this page's own estimates. The table shows where the inputs sit against the published record.</p>
+      <div class="tscroll"><table class="bench">
+        <thead><tr><th>Measure</th><th>This page</th><th>Published benchmarks</th></tr></thead>
+        <tbody>
+          <tr><td>EIS length, all agencies</td><td>2-year statutory cap when deadlines are met; case histories when they are not</td><td>Median 2.8 years from NOI to final EIS for 2019 to 2024 and 2.2 years for 2024; 41% of 2024 final EISs within 2 years (<a href="https://nepa.gov/sites/default/files/documents/CEQ_EIS_Timeline_Report_2025-1-13.pdf" target="_blank" rel="noopener">CEQ</a>). 39% of EISs finished after the 2023 deadline met it (<a href="https://bipartisanpolicy.org/article/permitting-speeds-up-but-61-of-reviews-are-still-late/" target="_blank" rel="noopener">BPC</a>).</td></tr>
+          <tr><td>Before the review starts</td><td>Developer work held equal under both regimes; BLM processing of 6 months for solar and 4 for wind and transmission when deadlines are met, 2 to 3 under the bill; 24 months for solar with delays</td><td>In four of five recent solar cases the developer was still filing amended applications or answers to BLM's questions 1 to 8 months before the NOI. BLM's own stretches: up to 15 months before its first request for more information (Rough Hat Clark), and 1.5 to 15 months from a complete application to the start of review, median about 7 (6 projects of all types) (BLM case records).</td></tr>
+          <tr><td>Solar on BLM land</td><td>22 months NOI to final EIS; 24 months to decision; 48 months application to decision</td><td>27 months NOI to decision on average, 32 EISs (<a href="https://media.rff.org/documents/Updated_Report_25-14_v2.pdf" target="_blank" rel="noopener">RFF</a>); 57.9 months from first action to decision on average (<a href="https://nam.org/wp-content/uploads/securepdfs/2026/03/NAM-America-on-Hold-Report-vF.pdf" target="_blank" rel="noopener">NAM and FAI</a>); 12 of 21 projects waited more than 2 years for an NOI (RFF); 30 to 55 months from application to NOI for five applications filed 2019 to 2021, median 35 (BLM case records, <a href="data/blm_case_records.csv">data collected for this page</a>).</td></tr>
+          <tr><td>Onshore wind on BLM land</td><td>Median 27.5 months NOI to final EIS and about 3 months to decision, 8 BLM projects (this page, from the CEQ dataset); 37 months application to decision</td><td>45 months NOI to decision on average across agencies, half over 2 years (RFF); 52.6 months from first action to decision (NAM and FAI); all 13 wind projects with full records reached the NOI within 2 years (RFF); Lava Ridge and Borderlands took 18 and 19 months from application to NOI (BLM case records).</td></tr>
+          <tr><td>Interstate transmission</td><td>2-year cap when met; 52 months NOI to final EIS and 71 to decision when not (TransWest); 30 months for a FERC backstop permit</td><td>FERC has never issued a backstop permit; for large new gas pipelines it took a median 31 months from approving pre-filing to a certificate, range 24 to 39 (FERC eLibrary). Median 3.7 years and average 4.3 years NOI to decision, 33 lines, 2010 to 2020; about 5 months more per 100 miles (<a href="https://www.niskanencenter.org/contextualizing-electric-transmission-permitting-data-from-2010-to-2020/" target="_blank" rel="noopener">Niskanen</a>). Greenlink West took 21 months from application to NOI, 15 of them after its application was complete (BLM case records).</td></tr>
+          <tr><td>Gas pipeline</td><td>10 months of pre-filing; 21 months NOI to final EIS; certificate 4 months later and 19 months after the application</td><td>Twelve large new pipelines certificated 2014 to 2023: median 9.7 months of pre-filing, 20.6 months NOI to final EIS, 3.9 months to the certificate, 21.4 months from application to certificate and 31 months from pre-filing to certificate (FERC eLibrary, <a href="data/ferc_pipelines.csv">data collected for this page</a>). FERC pipeline EISs: median 15 months NOI to final EIS and 17 months NOI to decision for 35 EISs, 2010 to 2024, and under 10 months to final EIS for those finished since 2019 (this page, from the CEQ dataset); all FERC EISs, median 2.29 years NOI to decision, 2010 to 2018 (<a href="https://nepa.gov/sites/default/files/documents/CEQ_EIS_Timeline_Report_2020-6-12.pdf" target="_blank" rel="noopener">CEQ</a>); 2.42 years per the Permitting Council (NAM and FAI).</td></tr>
+          <tr><td>Geothermal development review</td><td>10 months (EA)</td><td>Median 302 days (<a href="https://gdr.openei.org/files/1258/Geothermal%20Permitting%20and%20NEPA%20Timeline%20Analysis%20-%20FINAL.pdf" target="_blank" rel="noopener">NREL 2014</a>); 14 months on average, 2010 to 2023 (RFF); 14.6 months (NAM and FAI).</td></tr>
+          <tr><td>Offshore wind</td><td>2-year cap when met; 36 months NOI to final EIS when not (SouthCoast)</td><td>Median 30.9 months NOI to decision for 11 Atlantic projects, none under 24 months to final EIS (this page, from Federal Register dates); 44.3 months for all federal permits (<a href="https://www.liskow.com/insights/u-s-federal-offshore-wind-in-2024-growth-and-growing-pains-102lz80/" target="_blank" rel="noopener">Liskow</a>); 39 months from NOI to final EIS on Vineyard Mid-Atlantic's current schedule (Permitting Dashboard).</td></tr>
+          <tr><td>ESA consultation, offshore wind</td><td>13 months ending a month before the final EIS when deadlines are met, 7 under the bill; 14 months with delays</td><td>Eleven Atlantic projects, 2020 to 2024: a median 14 months from the first draft biological assessment to the opinion (12 to 25, 9 projects) and a median 155 days of formal consultation (112 to 246), under a 150-day timeline BOEM and NMFS adopted (<a href="https://www.fisheries.noaa.gov/s3/2023-08/Rev-Wind-BiOp-Final-072123-508-Compliant.pdf" target="_blank" rel="noopener">NMFS</a>). Ten of 11 opinions came before the final EIS and all 11 before the decision. Vineyard Wind 1 and Revolution Wind had consultations reopened after approval (NOAA biological opinions, <a href="data/noaa_consultations.csv">data collected for this page</a>).</td></tr>
+          <tr><td>Share of projects sued</td><td>Not modeled; "Delays and challenges" assumes a suit</td><td>28% of large energy and transport EISs, 2010 to 2018: about two thirds of solar, 50% of pipelines, 38% of wind, 31% of transmission (<a href="https://www.elr.info/sites/default/files/files-general/53.10836.pdf" target="_blank" rel="noopener">Bennon and Wilson</a>); 12 of 32 solar and 8 of 16 wind EISs (<a href="https://media.rff.org/documents/Updated_Report_25-15.pdf" target="_blank" rel="noopener">RFF</a>); about 1 in 450 NEPA decisions overall, 2001 to 2013 (<a href="https://dc.law.utah.edu/stegner_pubs/6" target="_blank" rel="noopener">Ruple and Race</a>).</td></tr>
+          <tr><td>Length of a lawsuit</td><td>9 months to a ruling under the bill; 9 to 12 months under current law, with appeals shown for solar</td><td>District courts about a year, appeals at least two more (RFF); medians of 23 months when the government wins and 30 when the plaintiff wins (Liscow 2024, via <a href="https://www.greentape.pub/p/nepastats" target="_blank" rel="noopener">Hochman</a>); about two years from approval to a final decision, 7% over six years (<a href="https://ifp.org/breaking-the-nepa-litigation-doom-loop/" target="_blank" rel="noopener">IFP</a>); 4.2 years from the environmental document to the end of an appeal (<a href="https://thebreakthrough.org/publications/understanding-nepa-litigation" target="_blank" rel="noopener">Breakthrough</a>).</td></tr>
+          <tr><td>Sponsor suits over delay</td><td>Under the bill, filed when the EIS deadline passes and decided in 4 months</td><td>One sponsor suit under the 2023 NEPA deadline provision, dismissed as premature 196 days after filing because the deadline had not passed (<a href="https://www.courtlistener.com/opinion/10050637/signal-peak-energy-llc-v-haaland/" target="_blank" rel="noopener">Signal Peak</a>, 2024). Developer and trade group suits against 2025 to 2026 review freezes won preliminary injunctions in 119 days, limited to the plaintiffs (<a href="https://clearinghouse.net/case/47547/" target="_blank" rel="noopener">Renew Northeast</a>, D. Mass.), and 67 days, nationwide (<a href="https://www.hollandhart.com/winds-of-change-federal-court-halts-dods-year-long-freeze" target="_blank" rel="noopener">Renewable Northwest v. Hegseth</a>, D. Or.) (<a href="data/court_cases.csv">data collected for this page</a>).</td></tr>
+          <tr><td>Who wins, and what it costs</td><td>Vacatur shown as a high-end case under current law</td><td>Agencies won about 80% of 387 appellate NEPA cases, 2013 to 2022 (Breakthrough) and more than 80% of 449 court decisions applying Seven County, with courts leaning toward remand without vacatur (<a href="https://www.wilmerhale.com/en/insights/client-alerts/20260604-one-year-after-seven-county-trends-in-nepa-review-and-litigation-risk" target="_blank" rel="noopener">WilmerHale</a>). Litigated wind and solar projects reached operation in 41.2 months against 40.9 for unlitigated ones; litigation helped end three projects in RFF's sample. Offshore wind: plaintiffs won 1 of 15 cases and 0 of 7 injunction motions (<a href="https://www.catf.us/2025/01/rough-seas-offshore-wind-hard-look-causes-delay/" target="_blank" rel="noopener">CATF</a>).</td></tr>
+          <tr><td>After the federal decision</td><td>2 to 4 months to a notice to proceed; interconnection not modeled</td><td>7 of 16 solar projects got a notice to proceed within a month; 9 of 24 solar and 7 of 14 wind projects needed four or more years after their decision to operate (RFF). The median plant built in 2025 took 61 months from interconnection request to operation (<a href="https://eta-publications.lbl.gov/sites/default/files/2026-06/queued_up_2026_edition.pdf" target="_blank" rel="noopener">LBNL</a>).</td></tr>
+          <tr><td>Deadline compliance</td><td>"Deadlines met" assumes compliance; "Delays and challenges" assumes extensions, then a suit</td><td>Agencies reported 2 EISs and 153 assessments as missing deadlines, June 2023 to June 2025 (<a href="https://nepa.gov/sites/default/files/documents/NEPAMissedDeadlinesTransmittaltoCongress.pdf" target="_blank" rel="noopener">CEQ</a>); 23 of 46 FAST-41 timetables extended, 14 by more than a year (Permitting Council); 20 of 40 FAST-41 wind, solar, transmission and gas pipeline projects finished or are due to finish more than a month after their original timetable, 6 by more than a year. Timetables are set when a project joins FAST-41, sometimes partway through its review, so this measures whether agencies kept their own schedules (Permitting Dashboard, <a href="data/dashboard_energy_projects.csv">data compiled for this page</a>).</td></tr>
+          <tr><td>What models say the bill would do</td><td>Months saved per project, this page's estimates</td><td>Modeling covers the transmission title, not the deadlines or court limits: C2ES and Greenline project a 9% cut in power sector CO2 in 2035 across four regions serving 54% of demand, with 65% more storage, 22% more solar and 14% more wind (<a href="https://www.c2es.org/?p=25546" target="_blank" rel="noopener">C2ES</a>). For the similar 2024 bill, RMI estimated 6.5 Gt CO2e through 2050 in its central case, with the interregional share alone ranging from 1.9 to 8.1 Gt across sensitivity cases (<a href="https://rmi.org/wp-content/uploads/dlm_uploads/2024/08/rmi_estimating_the_climate_impacts_epra.pdf" target="_blank" rel="noopener">RMI</a>); REPEAT found over 80% of the IRA's 2030 reductions are lost if transmission grows only 1% a year, the recent pace, and capturing them all needs about 2.3% a year (<a href="https://repeatproject.org/docs/repeat_ira_transmission_2022-09-22.pdf" target="_blank" rel="noopener">Princeton</a>).</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="data-sec">
+      <h2 id="h-sources">Sources</h2>
+      <ul id="sources" class="tight"></ul>
+    </section>
+  </div>
+  <footer class="caveat site-foot">Last updated October 7, 2026. Reflects the bill text released September 30, 2026; provisions may change as the bill moves.</footer>
+</main>
+<div class="tip" id="tip" role="tooltip" hidden></div>
+
+<script>
+(() => {
+  const SRC = {
+    bill: { name: "Bipartisan American Affordability and Jobs Act of 2026, bill text", url: "https://www.epw.senate.gov/public/_cache/files/5/c/5c5f5935-b224-48e7-abea-e60c30e7a4cf/7935BF3C85967B6F56F6F4858FD3221B7E0AEB02D04BE391CAFBD1B884CE3DC5.bipartisan-american-affordability-and-jobs-act-text.pdf" },
+    nepadl: { name: "42 U.S.C. 4336a, NEPA deadlines for assessments and EISs", url: "https://www.law.cornell.edu/uscode/text/42/4336a" },
+    fast41: { name: "42 U.S.C. 4370m-6, FAST-41 two-year limit on lawsuits", url: "https://www.law.cornell.edu/uscode/text/42/4370m-6" },
+    sol: { name: "28 U.S.C. 2401(a), six-year default limit on suits against the United States", url: "https://www.law.cornell.edu/uscode/text/28/2401" },
+    esa: { name: "50 CFR 402.14, formal consultation timing", url: "https://www.law.cornell.edu/cfr/text/50/402.14" },
+    cwa: { name: "33 U.S.C. 1341, Clean Water Act section 401", url: "https://www.law.cornell.edu/uscode/text/33/1341" },
+    nhpa: { name: "36 CFR part 800, Section 106 regulations", url: "https://www.law.cornell.edu/cfr/text/36/part-800" },
+    nwp2026: { name: "Army Corps, 2026 nationwide permits, 91 FR 768", url: "https://www.govinfo.gov/content/pkg/FR-2026-01-08/pdf/2026-00121.pdf" },
+    blmrow: { name: "43 CFR part 2800, BLM rights-of-way", url: "https://www.ecfr.gov/current/title-43/subtitle-B/chapter-II/subchapter-B/part-2800" },
+    blmplan: { name: "43 CFR part 1600, subpart 1610, BLM plan protests and governor's review", url: "https://www.law.cornell.edu/cfr/text/43/part-1600/subpart-1610" },
+    // Gas pipeline and geothermal
+    crs: { name: "CRS R43138, Interstate Natural Gas Pipelines: Process and Timing of FERC Permit Application Review", url: "https://www.everycrsreport.com/reports/R43138.html" },
+    fercPipes: { name: "FERC eLibrary dockets for 12 large new interstate pipelines (dates collected for this page; certificate dates checked against CEQ data)", url: "data/ferc_pipelines.csv" },
+    dashData: { name: "Permitting Dashboard, full milestone dataset (retrieved Oct. 6, 2026)", url: "https://data.permits.performance.gov/Permitting-Project/Permitting-Dashboard-Full-Dataset/mcm3-xbid" },
+    dashProj: { name: "FAST-41 wind, solar, transmission and gas pipeline schedules from the Permitting Dashboard (compiled for this page)", url: "data/dashboard_energy_projects.csv" },
+    dashMil: { name: "FAST-41 energy project milestones from the Permitting Dashboard (compiled for this page)", url: "data/dashboard_energy_milestones.csv" },
+    acpCancel: { name: "Dominion Energy and Duke Energy, Atlantic Coast Pipeline cancellation (July 2020)", url: "https://www.sec.gov/Archives/edgar/data/715957/000119312520187846/d936820dex991.htm" },
+    spireSP: { name: "S&P Global, Spire STL gains permanent FERC authorization after court action (Dec. 2022)", url: "https://www.spglobal.com/energy/en/news-research/latest-news/natural-gas/121522-spire-stl-gas-pipeline-project-gains-permanent-authorization-from-us-ferc-after-court-action" },
+    mvp: { name: "CRS IN12032, Mountain Valley Pipeline: Past the Finish Line (2024)", url: "https://www.everycrsreport.com/reports/IN12032.html" },
+    nga: { name: "15 U.S.C. 717r, Natural Gas Act rehearing and review", url: "https://www.law.cornell.edu/uscode/text/15/717r" },
+    seven: { name: "Seven County Infrastructure Coalition v. Eagle County (2025)", url: "https://www.law.cornell.edu/supremecourt/text/23-975" },
+    ceq2020: { name: "CEQ, EIS Timelines 2010–2018 (2020), agency tables", url: "https://nepa.gov/sites/default/files/documents/CEQ_EIS_Timeline_Report_2020-6-12.pdf" },
+    namfai: { name: "NAM and FAI, America on Hold (2026)", url: "https://nam.org/wp-content/uploads/securepdfs/2026/03/NAM-America-on-Hold-Report-vF.pdf" },
+    nepastats: { name: "Thomas Hochman, NEPAstats (Green Tape, Dec. 2024), compiling Liscow 2024 and Chiappa et al. 2024", url: "https://www.greentape.pub/p/nepastats" },
+    breakthrough: { name: "Breakthrough Institute, Understanding NEPA Litigation (2024)", url: "https://thebreakthrough.org/publications/understanding-nepa-litigation" },
+    wilmerhale: { name: "WilmerHale, One Year After Seven County (June 2026)", url: "https://www.wilmerhale.com/en/insights/client-alerts/20260604-one-year-after-seven-county-trends-in-nepa-review-and-litigation-risk" },
+    ifpLoop: { name: "Institute for Progress, Breaking the NEPA Litigation Doom Loop (Feb. 2026)", url: "https://ifp.org/breaking-the-nepa-litigation-doom-loop/" },
+    ifpCert: { name: "Institute for Progress, How to Create Real Permitting Certainty (Feb. 2026)", url: "https://ifp.org/how-to-create-real-permitting-certainty/" },
+    bennon: { name: "Bennon and Wilson, NEPA Litigation Over Large Energy and Transport Infrastructure Projects (2023)", url: "https://www.elr.info/sites/default/files/files-general/53.10836.pdf" },
+    bpcJR: { name: "Bipartisan Policy Center, Permitting 101: NEPA Judicial Review (Sept. 2026)", url: "https://bipartisanpolicy.org/explainer/permitting-101-nepa-judicial-review/" },
+    bpc106: { name: "Bipartisan Policy Center, Permitting 101: NHPA Section 106 Reform (Sept. 2026)", url: "https://bipartisanpolicy.org/explainer/permitting-101-nhpa-section-106-reform/" },
+    catfOSW: { name: "Clean Air Task Force, Rough Seas for Offshore Wind (Jan. 2025)", url: "https://www.catf.us/2025/01/rough-seas-offshore-wind-hard-look-causes-delay/" },
+    vma: { name: "Permitting Dashboard, Vineyard Mid-Atlantic Offshore Wind", url: "https://www.permits.performance.gov/permitting-project/fast-41-covered-projects/vineyard-mid-atlantic-offshore-wind-project" },
+    pcQ2: { name: "Permitting Council, FY2026 Q2 performance report (June 2026)", url: "https://www.permitting.gov/sites/default/files/2026-06/Permitting-Council_FY26Q2-Quarterly-Performance-Report.pdf" },
+    dixieNC: { name: "Nevada Current, toad listing forces Ormat and Interior to rethink Dixie Meadows (July 2023)", url: "https://nevadacurrent.com/?p=205014" },
+    dixieNI: { name: "Nevada Independent, Ormat sues over the Dixie Valley toad listing (Oct. 2025)", url: "https://thenevadaindependent.com/article/geothermal-developer-sues-feds-for-listing-nevada-toad-as-endangered" },
+    nrel: { name: "NREL, Geothermal Permitting and NEPA Timelines (GRC Transactions, 2014)", url: "https://gdr.openei.org/files/1258/Geothermal%20Permitting%20and%20NEPA%20Timeline%20Analysis%20-%20FINAL.pdf" },
+    plf: { name: "Pacific Legal Foundation, NEPA Delays in Geothermal Exploration and the Categorical Exclusion Myth (2026)", url: "https://pacificlegal.org/research/nepa-barrier-to-geothermal-exploration/" },
+    dixie: { name: "Center for Biological Diversity, Dixie Valley toad listing and Dixie Meadows (2022)", url: "https://biologicaldiversity.org/w/news/press-releases/lawsuit-launched-to-stop-power-plant-construction-save-nevada-toad-after-endangered-species-listing-2022-04-07/" },
+    // Onshore wind
+    ceqdata: { name: "CEQ, EIS timeline dataset 2010–2024 (2025); BLM wind and solar figures calculated for this page", url: "https://nepa.gov/sites/default/files/documents/CEQ_EIS_Timeline_Data_2024_1_13_2025.xlsx" },
+    faa77: { name: "14 CFR part 77, FAA notice and aeronautical study of structures", url: "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-E/part-77" },
+    faa: { name: "FAA Order JO 7400.2, Appendix 12, Evaluating Air Traffic Impacts for Wind Turbine Farm Proposals", url: "https://www.faa.gov/air_traffic/publications/atpubs/pham_html/appendix_12.html" },
+    dod: { name: "10 U.S.C. 183a, Defense Department Siting Clearinghouse", url: "https://www.law.cornell.edu/uscode/text/10/183a" },
+    dodpi: { name: "Holland & Hart, court halts the Defense Department's freeze on wind reviews (2026)", url: "https://www.hollandhart.com/winds-of-change-federal-court-halts-dods-year-long-freeze" },
+    signalPeak: { name: "Signal Peak Energy v. Haaland, D.D.C., order finding the deadline suit premature (Aug. 21, 2024)", url: "https://www.courtlistener.com/opinion/10050637/signal-peak-energy-llc-v-haaland/" },
+    signalPeakRod: { name: "OSMRE, Bull Mountains Mine No. 1 final EIS and record of decision, 90 FR (June 9, 2025)", url: "https://www.govinfo.gov/content/pkg/FR-2025-06-09/html/2025-10413.htm" },
+    courts: { name: "Federal suits over permitting delays, from CourtListener dockets (compiled for this page)", url: "data/court_cases.csv" },
+    blmCases: { name: "BLM case records (MLRS) and ePlanning dates for 18 projects (compiled for this page)", url: "data/blm_case_records.csv" },
+    noaaOps: { name: "NOAA Fisheries biological opinions for 11 Atlantic offshore wind projects, 2020 to 2024 (compiled for this page)", url: "data/noaa_consultations.csv" },
+    revwOp: { name: "NMFS, Revolution Wind biological opinion, on the 150-day offshore wind consultation timeline (July 2023)", url: "https://www.fisheries.noaa.gov/s3/2023-08/Rev-Wind-BiOp-Final-072123-508-Compliant.pdf" },
+    doimemo: { name: "Interior, Departmental Review Procedures for wind and solar actions (July 15, 2025)", url: "https://www.doi.gov/sites/default/files/documents/2025-07/dcos-pol-memo-doi-review-procedures-wind-and-solar-projects-2025-07-15-1-signed.pdf" },
+    crsappeal: { name: "CRS LSB11453, Renew Northeast ruling and Interior's appeal (July 2026)", url: "https://www.everycrsreport.com/reports/LSB11453.html" },
+    renew: { name: "Crowell, court blocks Interior wind and solar permitting policies (Apr. 2026)", url: "https://www.crowell.com/en/insights/client-alerts/federal-court-blocks-trump-administration-policies-restricting-wind-and-solar-permitting" },
+    mosey: { name: "Permitting Council, Mosey Solar timetable extension determination (Nov. 2025)", url: "https://cms.permits.performance.gov/sites/permits.dot.gov/files/2025-11/Mosey%20Solar%20Project%20Executive%20Director%20Determination_11-13-2025.pdf" },
+    eaglegp: { name: "FWS, eagle incidental take general permit", url: "https://www.fws.gov/service/3-200-71-eagle-incidental-take-general-permit" },
+    eaglepause: { name: "Hunton, FWS resumes eagle take permits for wind (2026)", url: "https://www.hunton.com/the-nickel-report/the-trump-administration-resumes-eagle-take-permitting-for-wind-facilities" },
+    ccsmFR: { name: "FWS, record of decision on Chokecherry and Sierra Madre eagle take permits (Jan. 2017)", url: "https://www.federalregister.gov/d/2017-01346" },
+    lava: { name: "Interior, moves to cancel the Lava Ridge approval (Aug. 2025)", url: "https://www.doi.gov/pressreleases/interior-department-moves-cancel-reckless-biden-era-approval-lava-ridge-wind-project" },
+    lavaNoi: { name: "BLM, Lava Ridge notice of intent, 86 FR 46867 (Aug. 2021)", url: "https://www.federalregister.gov/d/2021-17920" },
+    lavaRodFR: { name: "BLM, Lava Ridge record of decision notice, 89 FR 99904 (Dec. 2024)", url: "https://www.govinfo.gov/content/pkg/FR-2024-12-11/pdf/2024-29099.pdf" },
+    lavaRod: { name: "Idaho Capital Sun, BLM issues final approval of Lava Ridge (Dec. 2024)", url: "https://idahocapitalsun.com/2024/12/09/blm-issues-final-approval-of-scaled-down-lava-ridge-wind-project-in-idaho/" },
+    ocotillo: { name: "Ninth Circuit, Backcountry Against Dumps v. Jewell (Ocotillo Express, 2017)", url: "https://cdn.ca9.uscourts.gov/datastore/memoranda/2017/01/05/13-57129.pdf" },
+    // Solar
+    rff14: { name: "Resources for the Future, How Long Does It Take? (Report 25-14, 2025)", url: "https://www.rff.org/documents/5038/Updated_Report_25-14_v2.pdf" },
+    rff15: { name: "Resources for the Future, Taking Green Energy Projects to Court (Report 25-15)", url: "https://www.rff.org/documents/5009/Updated_Report_25-15.pdf" },
+    bonanzaNoi: { name: "BLM, Bonanza Solar notice of intent (June 2023)", url: "https://public-inspection.federalregister.gov/2023-11872.pdf" },
+    bonanzaDeis: { name: "BLM, Bonanza Solar draft EIS notice (Sept. 2024)", url: "https://govinfo.gov/content/pkg/FR-2024-09-06/pdf/2024-19552.pdf" },
+    bonanzaFeis: { name: "Pahrump Valley Times via now.solar, Nye County solar projects enter protest periods (Aug. 2026)", url: "https://now.solar/2026/08/28/solar-projects-in-nye-county-enter-protest-periods-pahrump-valley-times/" },
+    gemini: { name: "FWS, Gemini Solar biological opinion (Nov. 2019)", url: "https://files.library.northwestern.edu/transportation/online/unrestricted/EIS/2019/20190302/GeminiSolarProject_RMPA_FEIS_Vol%20II_AppendixN_BO_BA.pdf" },
+    libraBlm: { name: "BLM, Libra Solar decision realignment (Dec. 2025)", url: "https://www.blm.gov/announcement/blm-issues-decision-realignment-libra-solar-project" },
+    libra: { name: "pv magazine USA, BLM advances a solar project after a five-month freeze (Dec. 2025)", url: "https://pv-magazine-usa.com/2025/12/17/after-a-five-month-freeze-blm-finally-advances-a-solar-project/" },
+    // Transmission
+    niskanen: { name: "Niskanen Center, transmission permitting data from 2010 to 2020", url: "https://www.niskanencenter.org/contextualizing-electric-transmission-permitting-data-from-2010-to-2020/" },
+    transwest: { name: "TransWest Express, project timeline", url: "https://www.transwestexpress.net/about/timeline.shtml" },
+    sunziaFR: { name: "BLM, SunZia final EIS notice, 78 FR (June 2013)", url: "https://www.govinfo.gov/content/pkg/FR-2013-06-14/pdf/2013-14110.pdf" },
+    sunziaWECC: { name: "WECC, SunZia 2026 annual progress report", url: "https://www.wecc.org/sites/default/files/documents/progress_report/2026/SunZia%202026%20APR.pdf" },
+    sunziaAmend: { name: "BLM, SunZia amended record of decision, 88 FR (May 2023)", url: "https://govinfo.gov/content/pkg/FR-2023-05-19/pdf/2023-10784.pdf" },
+    sunzia9th: { name: "Ninth Circuit, Tohono O'odham Nation v. DOI (SunZia, 2025)", url: "https://cdn.ca9.uscourts.gov/datastore/opinions/2025/05/27/24-3659.pdf" },
+    b2h: { name: "Idaho Power, Boardman to Hemingway history", url: "https://idahopower.com/about-us/energy/planning-and-electrical-projects/current-projects/boardman-to-hemingway/B2H-History" },
+    grainbelt: { name: "Missouri PSC, Grain Belt Express certificate order (2019)", url: "https://www.energy.gov/sites/default/files/2025-01/MPSC_CCN_2019.pdf" },
+    nietc: { name: "DOE, cancellation of three proposed national interest corridors (Aug. 2026)", url: "https://www.energy.gov/articles/energy-secretary-announces-cancellation-three-proposed-national-interest-electric" },
+    crsnietc: { name: "CRS LSB11478, national interest corridors and backstop siting (Sept. 2026)", url: "https://www.everycrsreport.com/files/2026-09-04_LSB11478_736b7aade40964d99df9781b7eb535e7337e361d.html" },
+    // Offshore wind
+    boem: { name: "BOEM project pages and Federal Register notices for 11 Atlantic projects; medians calculated for this page", url: "https://www.boem.gov/renewable-energy/offshore-renewable-activities" },
+    liskow: { name: "Liskow, U.S. Federal Offshore Wind in 2024", url: "https://www.liskow.com/insights/u-s-federal-offshore-wind-in-2024-growth-and-growing-pains-102lz80/" },
+    epsilon: { name: "Epsilon Associates, Federal Offshore Wind Permitting and Environmental Review Processes (2025)", url: "https://www.epsilonassociates.com/wp-content/uploads/2025/09/Federal-Offshore-Wind-Permitting-and-Environmental-Review-Processes-Copy.pdf" },
+    scmmpa: { name: "NMFS, proposed incidental take rule for SouthCoast Wind (June 2024)", url: "https://www.federalregister.gov/d/2024-13770" },
+    revwind: { name: "News From The States, Revolution Wind begins delivering power (Mar. 2026)", url: "https://www.newsfromthestates.com/article/weve-got-power-revolution-wind-begins-delivering-electricity-regional-grid" },
+    mmpa: { name: "16 U.S.C. 1371(a)(5), marine mammal incidental take", url: "https://www.law.cornell.edu/uscode/text/16/1371" },
+    czma: { name: "15 CFR 930.78, timing of state coastal consistency decisions", url: "https://www.ecfr.gov/current/title-15/part-930/section-930.78" },
+    crmc: { name: "Rhode Island CRMC, Revolution Wind consistency decision (2023)", url: "https://www.crmc.ri.gov/windenergy/revolution/RevWind_FedConDecision_20230512.pdf" },
+    epaRev: { name: "EPA, Revolution Wind outer continental shelf air permit", url: "https://epa.gov/caa-permitting/permit-documents-revolution-wind-llcs-offshore-wind-energy-development-project" },
+    bsee: { name: "30 CFR part 285, BSEE facility design and fabrication reports", url: "https://www.ecfr.gov/current/title-30/chapter-II/subchapter-B/part-285" },
+    tracker: { name: "Harvard EELP, federal offshore wind deployment tracker", url: "https://eelp.law.harvard.edu/tracker/federal-offshore-wind-deployment" },
+    nyTrump: { name: "Harvard EELP, court vacates the wind permitting pause (Dec. 2025)", url: "https://eelp.law.harvard.edu/federal-court-vacates-wind-energy-authorization-pause/" },
+    troutman: { name: "Troutman, Five for Five: courts and offshore wind suspensions (2026)", url: "https://www.troutman.com/insights/five-for-five-how-the-apa-protected-offshore-wind-for-now/" }
+  };
+
+  const CAT = {
+    lead:  { name: "Lead agency review and NEPA", v: "--c1" },
+    water: { name: "Clean Water Act and Corps permits", v: "--c2" },
+    esa:   { name: "Wildlife (ESA, eagles, marine mammals)", v: "--c3" },
+    nhpa:  { name: "Historic preservation", v: "--c4" },
+    other: { name: "Other federal and state reviews", v: "--c7" },
+    lit:   { name: "Litigation", v: "--c5" },
+    build: { name: "Construction", v: "--c6" },
+    dev:   { name: "Developer work (not a federal permit)", v: "--c-dev" }
+  };
+
+  // Row helper: r(category, label, [[start, end, kind?], ...], basis, sources, { ms, assumed })
+  const r = (cat, label, bars, basis, src, o) => Object.assign(
+    { cat, label, bars: bars.map(([s, e, kind]) => ({ s, e, kind })), basis, src: src || [] }, o || {});
+  const A = { assumed: true };
+  const ms = (at, label, assumed) => ({ ms: [{ at, label }], assumed: !!assumed });
+
+  const SEVEN = " In Seven County v. Eagle County (2025) the Supreme Court said, in a passage that did not decide the case, that a flawed EIS does not necessarily require vacating the approval. Lower courts are not bound by it, but in the year after the ruling agencies won more than 80% of 449 court decisions applying Seven County and courts leaned toward remand without vacatur, so this is a high-end case.";
+
+  // ---------- Gas pipeline ----------
+  const P = {};
+  P.pre = r("lead", "FERC pre-filing", [[0, 10]], "Pre-filing is voluntary for pipelines, but FERC asks that it begin at least 210 days before the certificate application. Ten large new pipelines spent a median 9.7 months in pre-filing (range 5.7 to 13.2), 2013 to 2021.", ["crs", "fercPipes"]);
+  P.eis = r("lead", "FERC EIS, from NOI to final EIS", [[4, 25]], "FERC issues the NOI during pre-filing, here at month 4, about the median for large new pipelines. Assumes 21 months to the final EIS. Eleven large new pipelines took a median 20.6 months from NOI to final EIS (range 9.5 to 29.3); all FERC pipeline EISs took a median 15 months (35 EISs, 2010 to 2024), and under 10 months for those finished since 2019. FERC EISs of all kinds took a median 2.3 years from NOI to decision in 2010 to 2018, and the Permitting Council reports pipeline EISs average about 2.4 years. Since 2023, NEPA caps an EIS at 2 years.", ["fercPipes", "ceqdata", "ceq2020", "namfai", "nepadl"], A);
+  P.cert = r("lead", "FERC certificate order", [[25, 29]], "Twelve large new interstate pipelines certificated from 2014 to 2023 received certificates a median 3.9 months after the final EIS and 21.4 months after the application (range 14 to 28). GAO's 11.6-month average from application to certificate for pre-filed projects covers facilities of all sizes, including compressor stations and expansions, and does not separate EA from EIS reviews.", ["fercPipes", "ceq2020", "crs"], ms(29, "Certificate"));
+  P.eisB = Object.assign({}, P.eis, { basis: "Held at the same length so the comparison isolates the other changes. The EIS is due within 2 years of the earlier of the EIS determination or the completeness notice, and extensions need the sponsor's approval (Sec. 1106). Narrower NEPA scope could shorten it.", src: ["bill"] });
+  P.certB = r("lead", "FERC certificate order", [[25, 26.5]], "Due within 45 days of the final EIS (Sec. 1106).", ["bill"], ms(26.5, "Certificate"));
+  const LIT_CUR = " Agencies won about 80% of appellate NEPA cases from 2013 to 2022, and suits took a median 23 months when the government won and 30 months when the plaintiff won (Liscow 2024), so a nine-month loss is a fast, minority outcome.";
+
+  const pipe = {
+    smooth: {
+      takeaway: "When every agency meets its deadline, the bill changes little for a new pipeline. The certificate comes about two and a half months sooner under the 45-day decision deadline, the state water review gets shorter, and the wildlife and historic reviews must finish with the EIS, but the FERC EIS and the 90-day window for other federal permits set the pace under both regimes.",
+      short: "Little changes when agencies meet deadlines: the certificate comes 2.5 months sooner, and FERC's EIS and other federal permits still set the pace.",
+      current: [
+        P.pre, P.eis, P.cert,
+        r("nhpa", "Historic review (NHPA §106)", [[5, 29]], "No statutory deadline; state officers get 30-day review windows at each step. Assumes the review wraps up by the certificate, as a condition of construction.", ["nhpa"], A),
+        r("esa", "ESA consultation and biological opinion", [[20.5, 25]], "Regulations allow 90 days of formal consultation plus 45 days to issue the biological opinion.", ["esa"]),
+        r("water", "State water quality certification (§401)", [[10, 22]], "States get up to one year from the request. Assumes the request follows the FERC application and the state uses the full year.", ["cwa"], A),
+        r("water", "Other federal permits (Corps §404, land agencies)", [[25, 28]], "FERC's rules require other federal agencies to decide within 90 days of its final EIS.", ["crs"]),
+        r("lit", "Window to sue over federal permits", [[29, 101, "win"]], "Most federal permits have no special filing deadline, so the six-year default applies, or 2 years for projects covered by FAST-41. Challenges to the FERC certificate itself need a rehearing request within 30 days and a court petition within 60 days of the rehearing order.", ["sol", "fast41", "nga"]),
+        r("build", "Construction", [[29, 44]], "Assumes 15 months, starting once the certificate and the last permit are issued. Eight large new pipelines that have been built began service a median 11 months after their certificates, and full service often took longer; seven reached first service a median 40 months after pre-filing was approved.", ["fercPipes"], ms(44, "In service", true))
+      ],
+      baaja: [
+        P.pre, P.eisB, P.certB,
+        r("nhpa", "Historic review (NHPA §106)", [[4, 25]], "Must start with the environmental review and finish when the final EIS does, with fixed steps of 30, 60 and 90 days (Sec. 2301).", ["bill"]),
+        r("esa", "ESA consultation and biological opinion", [[21.5, 25]], "Formal consultation is cut to 60 days and must finish by the final EIS, absent extraordinary circumstances (Sec. 1302).", ["bill"]),
+        r("water", "State water quality certification (§401)", [[10, 19]], "Nine-month maximum for interstate gas pipelines, with review limited to direct point source discharges (Sec. 1202).", ["bill"]),
+        r("water", "Other federal permits (Corps §404, land agencies)", [[25, 28]], "Participating agencies must decide within 90 days of the final EIS, and the sponsor can sue to enforce it (Sec. 1106). The Corps must keep nationwide permits for pipeline crossings with discharges under 2 acres per project (Sec. 1204).", ["bill"]),
+        r("lit", "Window to sue over federal permits", [[26.5, 33, "win"]], "150 days from the date each approval is published or made public, for NEPA, historic review, §404 permits and other energy authorizations; the last federal permits here come at month 28 (Secs. 1110, 1205, 2201, 2301). FERC rehearing and appeal deadlines are unchanged.", ["bill"]),
+        r("build", "Construction", [[28, 43]], "Same 15 months, starting once the last federal permit is issued.", [], ms(43, "In service", true))
+      ]
+    },
+    contested: {
+      takeaway: "The bill's value shows up when reviews slip or a permit is challenged. Enforceable deadlines keep the state and federal permits on schedule, and a court that finds a NEPA, historic review or §404 flaw must remand without stopping work, unless a §404 permit poses an imminent and substantial danger. ESA and land-management claims can still halt construction. The record shows the stakes: of 12 large new pipelines FERC certificated from 2014 to 2023, Atlantic Coast was cancelled, PennEast's authorizations were vacated, Constitution was never built as approved, a court vacated Spire STL's certificate after it began operating, and Mountain Valley took nearly ten years from pre-filing to service.",
+      short: "Courts must remand rather than stop work on NEPA, historic review and §404 claims, and the state water permit is capped at 9 months. ESA and land-law claims can still halt work.",
+      current: [
+        P.pre, P.eis, P.cert,
+        r("nhpa", "Historic review (NHPA §106)", [[5, 30]], "No statutory deadline; state officers get 30-day review windows at each step. Assumes the review wraps up shortly after the certificate.", ["nhpa"], A),
+        r("esa", "ESA consultation and biological opinion", [[20.5, 28]], "Regulations allow 90 + 45 days. Assumes a three-month extension by agreement.", ["esa"], A),
+        r("water", "State water quality certification (§401)", [[25, 37]], "Assumes the state treats the request as complete only after FERC's final EIS, then uses the full year the statute allows.", ["cwa"], A),
+        r("water", "Other federal permits (Corps §404, land agencies)", [[25, 31]], "Assumes a 90-day overrun of FERC's 90-day deadline. A 2012 study found nearly one in five certificates in its sample delayed 90 days or more past that deadline.", ["crs"], A),
+        r("lit", "Window to sue over federal permits", [[31, 103, "win"]], "Six-year default limit for most federal permits, or 2 years for FAST-41 projects.", ["sol", "fast41"]),
+        r("lit", "Lawsuit over a federal permit", [[32, 41]], "Assumes a suit filed soon after the permit and decided about nine months later, with the court vacating the permit." + LIT_CUR + SEVEN + " Among large pipelines, the D.C. Circuit vacated Spire STL's certificate in 2021 while the line was running, and FERC reissued it in December 2022; Atlantic Coast was cancelled in 2020, its owners citing legal uncertainty, a court ruling against Nationwide Permit 12 and costs that had risen from about $5 billion to $8 billion.", ["nepastats", "breakthrough", "seven", "wilmerhale", "spireSP", "acpCancel"], A),
+        r("lit", "Work stopped while the permit is redone", [[41, 53]], "Assumes 12 months to reissue the vacated permit. After its 2017 certificate, Mountain Valley had its Corps permits rejected twice, its Forest Service and BLM approvals vacated twice, its biological opinion vacated in 2022 and West Virginia's water certification vacated in 2023. Congress ratified its permits in 2023, and it entered service in June 2024, nearly ten years after pre-filing was approved.", ["mvp", "fercPipes"], A),
+        r("build", "Construction", [[37, 41], [53, 64]], "Starts once the state certification arrives and stops while the vacated permit is redone. 15 months of work in total.", [], ms(64, "In service", true))
+      ],
+      baaja: [
+        P.pre, P.eisB, P.certB,
+        r("nhpa", "Historic review (NHPA §106)", [[4, 25]], "Must finish when the final EIS does; the sponsor can sue to enforce the deadline (Sec. 2301).", ["bill"]),
+        r("esa", "ESA consultation and biological opinion", [[21.5, 25]], "Must finish by the final EIS. Extensions only for extraordinary circumstances outside the parties' control (Sec. 1302).", ["bill"]),
+        r("water", "State water quality certification (§401)", [[10, 19]], "Nine-month maximum, running from receipt of the request. The state has 90 days to list any missing information, the applicant can go to court if it does not, and a missed deadline waives certification (Sec. 1202).", ["bill"]),
+        r("water", "Other federal permits (Corps §404, land agencies)", [[25, 28]], "Statutory 90-day deadline after the final EIS, enforceable in court (Sec. 1106).", ["bill"]),
+        r("lit", "Window to sue over federal permits", [[26.5, 33, "win"]], "150 days from the date each approval is published or made public; the last federal permits here come at month 28 (Secs. 1110, 1205, 2201, 2301).", ["bill"]),
+        r("lit", "Lawsuit over a federal permit", [[28, 37]], "Courts must expedite. Assumes a decision about nine months after filing that remands the permit, faster than any published NEPA litigation median (about two years from approval to a final court decision).", ["bill", "ifpLoop"], A),
+        r("lit", "Agency fixes the permit on remand", [[37, 43]], "Up to 180 days on remand. For NEPA, historic review and §404 claims the permit stays in effect and work continues, unless a §404 permit poses an imminent and substantial danger (Secs. 1110, 1205, 2301).", ["bill"]),
+        r("lit", "Possible stop if an ESA claim wins", [[37, 43, "possible"]], "The bill does not limit remedies for ESA or land-management claims, so a court could still vacate a biological opinion or a Forest Service or BLM approval and block work. Those were among the grounds that stopped Mountain Valley; the bill would have limited remedies only for its Corps permit claims. Challenges to a biological opinion go to the D.C. Circuit within 150 days (Sec. 1305), and the remand runs on a 180-day clock (Sec. 2201). Not counted in the in-service date.", ["bill", "mvp"]),
+        r("build", "Construction", [[28, 43]], "Same 15 months, uninterrupted unless an ESA claim succeeds.", [], ms(43, "In service", true))
+      ],
+      extra: "Up to 6 months later if an ESA claim stops work"
+    }
+  };
+
+  // ---------- Geothermal plant ----------
+  const G = {};
+  G.lease = r("lead", "Lease nomination to lease sale", [[0, 12]], "BLM must hold sales at least every two years. Assumes an average 12-month wait; leasing review is usually tiered to an existing programmatic EIS.", ["nrel"], A);
+  G.explore = r("lead", "Exploration permits (test wells)", [[12, 19]], "BLM exploration-stage NEPA reviews averaged 210 days (median 105) across 133 projects.", ["plf"]);
+  G.drill = r("dev", "Exploration drilling and resource testing", [[19, 25]], "Developer work, assumed at 6 months under both regimes.", [], A);
+  G.ea = r("lead", "Development review (EA): wells, plant, utilization plan", [[25, 35]], "Geothermal EAs took a median 302 days in NREL's 2014 sample (EISs 749 days) and averaged 14 months in RFF's 2009 to 2023 sample. Since 2023, NEPA caps an EA at 1 year.", ["nrel", "rff14"]);
+  G.line = r("lead", "Transmission line right-of-way", [[25, 35]], "Usually reviewed in the same EA as the plant.", ["nrel"]);
+  G.esa = r("esa", "ESA consultation", [[29, 35]], "Runs alongside the EA; formal consultation allows 90 + 45 days.", ["esa"]);
+  G.nhpa = r("nhpa", "Historic review (NHPA §106)", [[25, 35]], "Runs alongside the EA, with no statutory deadline.", ["nhpa"]);
+  G.gdp = r("lead", "Geothermal drilling permits", [[35, 37]], "No statutory deadline today. Assumes 2 months after the EA.", [], A);
+
+  const GB = {};
+  GB.lease = Object.assign({}, G.lease, { bars: [{ s: 0, e: 6 }], basis: "Annual sales, with a replacement sale if one is canceled or delayed (Sec. 2223). Assumes a 6-month average wait.", src: ["bill"] });
+  GB.explore = Object.assign({}, G.explore, { bars: [{ s: 6, e: 7 }], assumed: true, basis: "Test wells disturbing up to 10 acres are outside NEPA (Secs. 1102, 2221); casual-use work needs 30 days' notice. Assumes about a month.", src: ["bill"] });
+  GB.drill = Object.assign({}, G.drill, { bars: [{ s: 7, e: 13 }] });
+  GB.ea = Object.assign({}, G.ea, { bars: [{ s: 13, e: 23 }], basis: "Held at the same length. The EA is due within 1 year of the completeness notice (Sec. 1106).", src: ["bill"] });
+  GB.line = Object.assign({}, G.line, { bars: [{ s: 13, e: 15 }], assumed: true, basis: "Lines up to 20 miles in a corridor approved within the past 10 years are no longer major federal actions (Sec. 2229). Assumes 2 months for the right-of-way grant.", src: ["bill"] });
+  GB.esa = Object.assign({}, G.esa, { bars: [{ s: 17, e: 23 }], basis: "Must finish when the EA does (Sec. 1302).", src: ["bill"] });
+  GB.nhpa = Object.assign({}, G.nhpa, { bars: [{ s: 13, e: 23 }], basis: "Must finish when the EA does (Sec. 2301).", src: ["bill"] });
+  GB.gdp = Object.assign({}, G.gdp, { bars: [{ s: 23, e: 25 }], assumed: false, basis: "30 days to deem an application complete, then 30 days to issue or defer (Sec. 2223).", src: ["bill"] });
+
+  const geo = {
+    smooth: {
+      takeaway: "Most of the time saved comes before and around the main environmental review: annual lease sales, test wells outside NEPA, short transmission lines in existing corridors, and firm deadlines for drilling permits.",
+      short: "Annual lease sales and test wells outside NEPA save a year before development review starts.",
+      current: [G.lease, G.explore, G.drill, G.ea, G.line, G.esa, G.nhpa, G.gdp,
+        r("lit", "Window to sue over the approval", [[37, 109, "win"]], "Six-year default limit, or 2 years for FAST-41 projects.", ["sol", "fast41"]),
+        r("build", "Construction", [[37, 61]], "Assumes 24 months for wells, plant and line.", [], ms(61, "In service", true))],
+      baaja: [GB.lease, GB.explore, GB.drill, GB.ea, GB.line, GB.esa, GB.nhpa, GB.gdp,
+        r("lit", "Window to sue over the approval", [[25, 30, "win"]], "150 days to file (Secs. 1110, 2201, 2301).", ["bill"]),
+        r("build", "Construction", [[25, 49]], "Same 24 months.", [], ms(49, "In service", true))]
+    },
+    contested: {
+      takeaway: "Under current law a successful NEPA or historic review claim can vacate the approval and send the project back for a new review. Under the bill those claims end in a remand while work continues, but species disputes can still stop construction. Dixie Meadows in Nevada, approved in 2021, remains unbuilt after an injunction, an emergency toad listing and a supplemental review, and the bill would not change that outcome.",
+      short: "A successful NEPA claim ends in a remand rather than a stopped project; species disputes can still halt work.",
+      current: [G.lease, G.explore, G.drill, G.ea, G.line, G.esa, G.nhpa, G.gdp,
+        r("lit", "Window to sue over the approval", [[37, 109, "win"]], "Six-year default limit, or 2 years for FAST-41 projects.", ["sol", "fast41"]),
+        r("lit", "Lawsuit over the approval", [[37, 46]], "Assumes a suit at approval, decided about nine months later." + LIT_CUR, ["nepastats", "breakthrough"], A),
+        r("lit", "Preliminary injunction", [[38, 41]], "Assumes a 90-day injunction. Dixie Meadows in Nevada was approved in late 2021; a court halted construction in January 2022 and the Ninth Circuit lifted that order in February. The plant was never built: an emergency listing of the Dixie Valley toad in 2022 stopped work again, Ormat cut it from 60 MW to 12 MW, a supplemental review followed, and in late September 2025 Ormat sued over the listing.", ["dixie", "dixieNC", "dixieNI"], A),
+        r("lit", "Approval vacated; agency redoes the EA", [[46, 58]], "Assumes the court vacates the approval on NEPA grounds and the agency takes 12 months to redo it." + SEVEN, ["seven"], A),
+        r("build", "Construction", [[37, 38], [41, 46], [58, 76]], "24 months of work in total, stopped during the injunction and while the EA is redone.", [], ms(76, "In service", true))],
+      baaja: [GB.lease, GB.explore, GB.drill, GB.ea, GB.line, GB.esa, GB.nhpa, GB.gdp,
+        r("lit", "Window to sue over the approval", [[25, 30, "win"]], "150 days to file (Secs. 1110, 2201, 2301).", ["bill"]),
+        r("lit", "Lawsuit over the approval", [[25.5, 34.5]], "Courts must expedite. Assumes a decision about nine months after filing.", ["bill"], A),
+        r("lit", "Possible injunction on an ESA claim", [[26.5, 29.5, "possible"]], "NEPA and historic review claims can no longer support an injunction, but ESA claims still can, so a listing-driven stop like Dixie Meadows remains possible. Challenges to a biological opinion go to the D.C. Circuit within 150 days (Sec. 1305). Not counted in the in-service date.", ["bill"]),
+        r("lit", "Agency fixes the approval on remand", [[34.5, 40.5]], "Up to 180 days; for NEPA and historic review claims the approval stays in effect while the agency fixes it (Secs. 1110, 2301).", ["bill"]),
+        r("build", "Construction", [[25, 49]], "Same 24 months, uninterrupted unless an ESA claim succeeds.", [], ms(49, "In service", true))],
+      extra: "About 3 months later if an ESA injunction is granted"
+    }
+  };
+
+  // ---------- Shared BAAJA rows for the BLM, offshore and transmission projects ----------
+  const PAT = (type) => ` A delay more than 60 days past the deadline can also support damages of 50% to 100% of expected construction cost, but only if the sponsor proves a substantial increase in delays for that type of project against the prior five years, lasting at least 280 days after enactment, that the government created intentionally (Sec. 1402).`;
+  const B = {
+    deadlineSuit: (s, e, extra) => r("lit", "Sponsor's suit to enforce the EIS deadline", [[s, e]], "Filed when the deadline passes. The court must rule within 120 days, absent extraordinary circumstances, then order a decision within 60 days (Sec. 1106). The agency can excuse a missed deadline only by proving, by clear and convincing evidence, causes such as a funding lapse of more than 2 weeks or that acting on time would violate its legal duties. Today's law already lets a sponsor ask a court to set a new deadline of up to 90 days; the one sponsor suit under that provision found so far was dismissed as premature because it was filed before the deadline passed." + (extra || ""), ["bill", "signalPeak"], A),
+    window: (s) => r("lit", "Window to sue over the approval", [[s, s + 5, "win"]], "150 days from the date the approval is published or made public (Secs. 1110, 2201, 2301).", ["bill"]),
+    suit: (s) => r("lit", "Lawsuit over the approval", [[s, s + 9]], "NEPA claims now go straight to the court of appeals, which must act expeditiously (Sec. 1110). Assumes a ruling about nine months after filing that remands the approval, faster than any published NEPA litigation median: about two years from approval to a final court decision, and 23 to 30 months per case.", ["bill", "ifpLoop", "nepastats"], A),
+    remand: (s) => r("lit", "Agency fixes the approval on remand", [[s, s + 6]], "Up to 180 days. For NEPA and historic review claims the approval stays in effect and work continues (Secs. 1110, 2301).", ["bill"]),
+    stop: (s, label, basis) => r("lit", label, [[s, s + 6, "possible"]], basis + " Challenges to a biological opinion go to the D.C. Circuit within 150 days (Sec. 1305). Not counted in the in-service date.", ["bill"]),
+    late: (month, steps) => `The bill allows ${steps} (Sec. ${steps.indexOf("30 days") === 0 ? "2213" : "1109"}). Assumes the agency sends the completeness notice and the NOI together at month ${month}, 4 months past the bill's outer limit. The 2-year EIS clock starts at the notice, and these steps can be enforced only through an ordinary suit to compel agency action, not the bill's expedited petition.`
+  };
+  const EIS_LATE = "Due 2 years after the completeness notice, and extensions need the sponsor's approval (Sec. 1106). Assumes the agency still misses the deadline and the sponsor sues to enforce it.";
+  const NWP_NOTE = "Work can usually proceed 45 days after notice unless the Corps responds; where listed species or historic properties may be affected, the builder waits for written approval.";
+  const MEMO_ENJ = "it is blocked only for members of the plaintiff trade groups, and the government has appealed.";
+
+  // ---------- Onshore wind on BLM land ----------
+  const W = {};
+  W.dev = r("dev", "Developer completes the plan of development and surveys", [[0, 6]], "Assumed at 6 months under both regimes. Eagle-use and other wildlife surveys usually start a year or more before the application.", [], A);
+  W.faa = r("other", "FAA and Defense Department reviews of turbine sites", [[6, 14]], "FAA studies each turbine for air safety, and the Defense Department's Siting Clearinghouse reviews conflicts with military operations. Assumes 8 months.", ["faa77", "faa", "dod"], A);
+  W.faaB = Object.assign({}, W.faa, { basis: "Unchanged by the bill. Assumes the same 8 months." });
+  W.faaC = r("other", "FAA and Defense Department reviews of turbine sites", [[6, 20]], "Assumes 14 months. The Defense Department's Siting Clearinghouse slowed and then halted wind reviews in 2025 and 2026 until a court ordered them to resume in August 2026. Developers and trade groups sued on May 31, 2026, and won a nationwide preliminary injunction 67 days later; the court found the department had missed its review deadlines.", ["dod", "dodpi", "courts"], A);
+  W.faaCB = Object.assign({}, W.faaC, { basis: "Unchanged by the bill. Assumes the same 14 months." });
+
+  const wind = {
+    smooth: {
+      max: 72, tick: 6,
+      takeaway: "When agencies meet deadlines, the bill saves about four and a half months for a wind farm on BLM land. BLM must send the completeness notice that starts the 2-year EIS clock within 30 days, the record of decision is due 45 days after the final EIS, and wildlife and historic reviews must finish with the EIS. Developer work, FAA review and the EIS itself still set the pace.",
+      short: "A 30-day completeness notice and a 45-day decision save about four and a half months.",
+      current: [
+        W.dev,
+        r("lead", "BLM application processing to notice of intent (NOI)", [[6, 10]], "No deadline. Assumes 10 months in total, including developer work. RFF found all 13 wind projects with full records took under two years from first action to NOI. Lava Ridge in Idaho took about 18 months from application to NOI and Borderlands in New Mexico about 19; Borderlands' NOI came 5 months after BLM recorded its application as complete.", ["lavaNoi", "lavaRod", "blmCases", "dashMil"], A),
+        W.faa,
+        r("lead", "EIS, from NOI to final EIS", [[10, 34]], "Since 2023, NEPA has required an EIS within 2 years of the earliest of the EIS determination, the right-of-way completeness notice or the NOI, extendable after consulting the applicant. Assumes BLM sends the completeness notice with the NOI and meets the deadline. Eight wind farms on BLM land took a median 27.5 months from NOI to final EIS (2010 to 2024, all begun before the deadline existed); across all agencies, RFF found wind EISs averaged 45 months from NOI to decision and half ran past two years.", ["nepadl", "ceqdata", "rff14"], A),
+        r("lead", "Protest period and record of decision", [[34, 37]], "Those eight projects took a median of about 3 months from final EIS to decision. When a land use plan is amended, a 30-day protest period and a 60-day governor's review come first.", ["ceqdata", "blmplan"], ms(37, "Decision")),
+        r("esa", "ESA consultation", [[24, 30]], "Regulations allow 90 days of formal consultation, extendable 60 days without the applicant's consent, plus 45 days for the biological opinion, which usually follows the draft EIS.", ["esa"]),
+        r("esa", "Eagle take permit (general permit)", [[36, 37]], "Under a 2024 rule, wind projects that meet siting criteria can register for a general permit without case-by-case review. FWS stopped issuing them to wind projects from January 2025 to January 2026.", ["eaglegp", "eaglepause"]),
+        r("nhpa", "Historic review (NHPA §106)", [[10, 36]], "No overall deadline; state officers get 30-day review windows at each step. The agreement on how to treat effects is usually signed before the decision.", ["nhpa"]),
+        r("water", "Corps nationwide permit for stream crossings", [[32, 35]], "Needed only where roads or collection lines cross regulated waters. " + NWP_NOTE + " Verifications averaged 55 days in FY2024.", ["nwp2026"]),
+        r("lead", "Right-of-way grant, final plan and notice to proceed", [[37, 40]], "BLM issues the grant with or after the decision, then approves the final plan of development and a notice to proceed before construction. Assumes 3 months.", ["blmrow"], A),
+        r("lit", "Window to sue over the approval", [[37, 109, "win"]], "Six-year default limit, or 2 years for projects covered by FAST-41.", ["sol", "fast41"]),
+        r("build", "Construction", [[40, 58]], "Assumes 18 months.", [], ms(58, "In service", true))
+      ],
+      baaja: [
+        W.dev,
+        r("lead", "Completeness review and NOI", [[6, 8]], "BLM must find the application complete, or list what is missing, within 30 days, then issue the NOI within 90 days (Sec. 2213). Assumes the completeness notice at month 7 and the NOI a month later.", ["bill"], A),
+        W.faaB,
+        r("lead", "EIS, from NOI to final EIS", [[8, 31]], "Due 2 years after the completeness notice, the same trigger current law uses for rights-of-way; the bill's change is the 30-day deadline to send that notice. Extensions now need the sponsor's approval (Sec. 1106). Assumes the deadline is met, 23 months after the NOI.", ["bill"], A),
+        r("lead", "Record of decision", [[31, 32.5]], "Due within 45 days of the final EIS (Sec. 1106).", ["bill"], ms(32.5, "Decision")),
+        r("esa", "ESA consultation", [[21, 26]], "Formal consultation is cut to 60 days and must finish by the final EIS, absent extraordinary circumstances (Sec. 1302).", ["bill"]),
+        r("esa", "Eagle take permit (general permit)", [[31.5, 32.5]], "Unchanged. An eagle permit FWS reviews alongside the EIS is due within 90 days of the final EIS (Sec. 1106).", ["eaglegp", "bill"]),
+        r("nhpa", "Historic review (NHPA §106)", [[8, 31]], "Must start with the environmental review and finish when the final EIS does (Sec. 2301).", ["bill"]),
+        r("water", "Corps nationwide permit for stream crossings", [[29, 32]], "Unchanged in length. Agencies taking part in the review must decide within 90 days of the final EIS (Sec. 1106).", ["bill"]),
+        r("lead", "Right-of-way grant, final plan and notice to proceed", [[32.5, 35.5]], "Assumes the same 3 months. The right-of-way grant is due within 90 days of the final EIS (Sec. 1106); whether that deadline reaches a notice to proceed that depends on a final plan filed later is unsettled.", ["bill"], A),
+        B.window(32.5),
+        r("build", "Construction", [[35.5, 53.5]], "Same 18 months.", [], ms(53.5, "In service", true))
+      ]
+    },
+    contested: {
+      max: 120, tick: 12,
+      takeaway: "The bill matters when reviews stall or approvals are reversed. Extensions need the sponsor's approval, a court must enforce a missed EIS deadline within months, and Secretary-level review has to fit inside the bill's deadlines. Once granted, an approval can be revoked or suspended only on narrow grounds the agency must prove by clear and convincing evidence, which would make a move like Interior's 2025 effort to cancel Lava Ridge much harder. Eagle Act, ESA and land-law claims can still stop construction, and the gain assumes the sponsor is willing to sue its regulator.",
+      short: "Sponsor-approved extensions, court-enforced deadlines and limits on revoking approvals cut nearly four years.",
+      current: [
+        W.dev,
+        r("lead", "BLM application processing to NOI", [[6, 24]], "No deadline. Lava Ridge in Idaho took about 18 months from application to NOI and Borderlands in New Mexico about 19. Since July 2025, Interior has also required Secretary-level review of wind NOIs and most later steps. Assumes 24 months from the application.", ["lavaNoi", "blmCases", "doimemo"], A),
+        W.faaC,
+        r("lead", "EIS, with extensions", [[24, 74]], "Chokecherry and Sierra Madre and Searchlight took 36 and 37 months from NOI to draft EIS, and Lava Ridge about 17 months from draft to final. Agencies can extend the 2-year deadline after consulting the applicant, with no cap. A sponsor can already ask a court to enforce a missed deadline, but an extension leaves nothing to enforce. Assumes the extra time is agency delay rather than changes the sponsor requested.", ["ceqdata", "nepadl"], A),
+        r("lead", "Protests and governor's review", [[74, 80]], "BLM wind projects took 1.3 to 5.9 months from final EIS to decision; Lava Ridge took the longest. Assumes 6 months.", ["ceqdata", "lavaRodFR", "blmplan"], A),
+        r("lead", "Secretary's office review before the decision", [[80, 90]], "Interior's July 2025 memo requires Secretary-level review of wind and solar actions, listing 69 types, with no deadline; " + MEMO_ENJ + " Assumes 10 months, about how far the memo pushed back Mosey Solar's federal schedule.", ["doimemo", "renew", "crsappeal", "mosey"], ms(90, "Decision", true)),
+        r("esa", "ESA consultation", [[60, 70]], "Assumes 10 months with extensions.", ["esa"], A),
+        r("esa", "Eagle take permit (specific permit with its own EIS)", [[30, 67]], "Sites near golden eagle nests often do not qualify for a general permit. A specific permit has no deadline; FWS's eagle permit EIS for Chokecherry and Sierra Madre took about 3 years, ending with a decision in January 2017.", ["ccsmFR", "eaglegp"]),
+        r("nhpa", "Historic review (NHPA §106)", [[24, 80]], "No overall deadline. Assumes the agreement is signed before the decision.", ["nhpa"], A),
+        r("water", "Corps nationwide permit for stream crossings", [[84, 88]], "Assumes 4 months. A September 2025 Army memo deprioritized permits for projects with low energy output per acre; " + MEMO_ENJ, ["renew", "crsappeal"], A),
+        r("lead", "Right-of-way grant, final plan and notice to proceed", [[90, 93]], "Assumes 3 months.", [], A),
+        r("lit", "Window to sue over the approval", [[90, 162, "win"]], "Six-year default limit, or 2 years for FAST-41 projects.", ["sol", "fast41"]),
+        r("lit", "Lawsuit over the approval, no injunction", [[91, 103]], "Assumes a suit soon after the decision and a district court ruling about a year later. Ocotillo Express in California was sued three days after its May 2012 decision; the district court ruled for BLM in February 2013 and the Ninth Circuit affirmed in 2015. A second suit was affirmed in 2017. Neither stopped construction." + LIT_CUR, ["rff15", "ocotillo", "nepastats", "breakthrough"], A),
+        r("lit", "Possible remand or vacatur that stops the project", [[103, 115, "possible"]], "A court sent Searchlight Wind's 2013 approval back to BLM in 2015, and BLM closed the application in 2017. RFF found litigation caused or contributed to the termination of three wind and solar projects in its sample." + SEVEN + " Not counted.", ["rff15", "seven", "wilmerhale"]),
+        r("lead", "Possible reversal of the approval", [[93, 101, "possible"]], "Interior moved to cancel Lava Ridge's December 2024 approval eight months later. Not counted in the in-service date.", ["lava", "lavaRodFR"]),
+        r("build", "Construction", [[93, 111]], "Same 18 months, uninterrupted unless the approval is reversed or vacated.", [], ms(111, "In service", true))
+      ],
+      baaja: [
+        W.dev,
+        r("lead", "Completeness review and NOI", [[6, 14]], B.late(14, "30 days to find the application complete and 90 more to issue the NOI"), ["bill"], A),
+        W.faaCB,
+        r("lead", "EIS, from NOI to final EIS", [[14, 42]], EIS_LATE, ["bill"], A),
+        B.deadlineSuit(38, 42, PAT("wind projects")),
+        r("lead", "Court-ordered record of decision", [[42, 44]], "Assumes the decision comes at the end of the 60 days the court allows. Secretary-level review has to fit inside these deadlines.", ["bill"], ms(44, "Decision", true)),
+        r("esa", "ESA consultation", [[36, 42]], "Must finish by the final EIS, absent extraordinary circumstances (Sec. 1302).", ["bill"]),
+        r("esa", "Eagle take permit (specific permit)", [[20, 45]], "Assumes FWS takes part in the BLM review, so the permit is due within 90 days of the final EIS. If FWS does not take part, it is due within 120 days (Sec. 1106).", ["bill"], A),
+        r("nhpa", "Historic review (NHPA §106)", [[14, 42]], "Must finish when the final EIS does (Sec. 2301).", ["bill"]),
+        r("water", "Corps nationwide permit for stream crossings", [[42, 45]], "Due within 90 days of the final EIS (Sec. 1106).", ["bill"]),
+        r("lead", "Right-of-way grant, final plan and notice to proceed", [[44, 47]], "Assumes 3 months; the right-of-way grant is due within 90 days of the final EIS (Sec. 1106). Once granted, an approval in effect can be revoked or suspended only on a court order, material breach, fraud, specific urgent harm based on new information, or the holder's request, and the agency must prove the exception by clear and convincing evidence (Sec. 1401).", ["bill"], A),
+        B.window(44),
+        B.suit(45),
+        B.remand(54),
+        B.stop(54, "Possible stop on an eagle, ESA or land-law claim", "The bill's limits on remedies cover NEPA and historic review claims. A court can still halt work over Eagle Act, ESA or FLPMA violations."),
+        r("build", "Construction", [[47, 65]], "Same 18 months, uninterrupted unless an eagle, ESA or land-law claim succeeds.", [], ms(65, "In service", true))
+      ],
+      extra: "Up to 6 months later if an eagle, ESA or land-law claim stops work"
+    }
+  };
+
+  // ---------- Solar on BLM land ----------
+  const S = {};
+  S.dev = r("dev", "Developer completes the plan of development and surveys", [[0, 12]], "Assumed at 12 months under both regimes. Desert tortoise and cultural surveys follow seasonal windows. In a slowdown BLM's hold, not this work, sets the pace: Mosey's developer last answered BLM's questions 39 months before its NOI.", ["blmCases"], A);
+  S.dev18 = r("dev", "Developer completes the plan of development and surveys", [[0, 18]], "Assumed at 18 months under both regimes, including rounds of BLM questions and amended applications: in four of five recent solar cases the developer was still filing 1 to 8 months before the NOI. Desert tortoise and cultural surveys follow seasonal windows.", ["blmCases"], A);
+
+  const solar = {
+    smooth: {
+      max: 84, tick: 12,
+      takeaway: "The gain comes before the EIS starts. BLM must find an application complete or list what is missing within 30 days and issue the NOI within 90 days, cutting the queue that left most solar projects waiting more than two years for an NOI. BLM's records suggest most of today's wait is developer work and back-and-forth the bill does not time, so the model credits BLM with 6 months of it and the saving is about 4 months. When BLM holds the file in a slowdown, the saving is far larger.",
+      short: "Most of today's wait is developer work the bill does not time, so the gain is about four months.",
+      current: [
+        S.dev18,
+        r("lead", "BLM processing to notice of intent (NOI)", [[18, 24]], "No deadline. RFF found that 12 of 21 solar projects took more than 2 years from application to NOI. BLM's case records for five applications filed from 2019 to 2021 show 30 to 55 months from application to NOI, a median of 35. In four of them the developer was still filing amended applications or answers to BLM's questions 1 to 8 months before the NOI; for four older projects, the review began 1.5 to 9 months after BLM recorded the application as complete. Assumes 24 months in total, 6 of them BLM processing, about the median once an application is complete.", ["rff14", "blmCases", "dashMil"], A),
+        r("lead", "EIS, from NOI to final EIS", [[24, 46]], "Since 2023, NEPA has required an EIS within 2 years of the earliest of the EIS determination, the right-of-way completeness notice or the NOI. Assumes BLM sends the completeness notice with the NOI. RFF found solar EISs averaged 27 months from NOI to decision (32 projects, 2009 to 2023). Assumes 22 months to the final EIS.", ["rff14", "nepadl"], A),
+        r("lead", "Protests and record of decision", [[46, 48]], "Assumes 2 months. Recent solar projects took about 1.5 to 4.5 months from final EIS to decision.", ["ceqdata", "blmplan"], ms(48, "Decision", true)),
+        r("esa", "ESA consultation (desert tortoise)", [[37, 42]], "Regulations allow 90 days of formal consultation plus 45 days for the biological opinion. Gemini Solar's formal consultation took 143 days.", ["esa", "gemini"]),
+        r("nhpa", "Historic review (NHPA §106)", [[24, 48]], "No overall deadline; the agreement is usually signed by the decision.", ["nhpa"]),
+        r("water", "Corps nationwide permit (if washes are regulated)", [[40, 42]], "Many desert projects avoid regulated washes. Where they cannot: " + NWP_NOTE, ["nwp2026"]),
+        r("lead", "Final plan and notice to proceed", [[48, 50]], "RFF found 7 of 16 solar projects got a notice to proceed within a month of the decision; four others waited 20 to 78 months. In BLM's case records for six projects, the first notice to proceed came a median of about a year after the decision, from under a week to 19 months. The step depends on the developer's final plans as well as on BLM, and the charts hold it equal under both regimes. Assumes 2 months.", ["rff14", "blmCases"], A),
+        r("lit", "Window to sue over the approval", [[48, 120, "win"]], "Six-year default limit, or 2 years for FAST-41 projects. RFF found 22 of 27 federal suits over solar and wind approvals were filed within 120 days.", ["sol", "fast41", "rff15"]),
+        r("build", "Construction", [[50, 72]], "Assumes 22 months. RFF found none of 16 solar projects reached full operation within 5 years of their first federal action, usually the application.", ["rff14"], ms(72, "In service", true))
+      ],
+      baaja: [
+        S.dev18,
+        r("lead", "Completeness review and NOI", [[18, 20]], "BLM must find the application complete, or list what is missing, within 30 days, then issue the NOI within 90 days (Sec. 2213). Assumes the completeness notice at month 19 and the NOI a month later.", ["bill"], A),
+        r("lead", "EIS, from NOI to final EIS", [[20, 42]], "Held at the same 22 months, inside the 2-year deadline that runs from the completeness notice. Extensions now need the sponsor's approval (Sec. 1106).", ["bill"]),
+        r("lead", "Record of decision", [[42, 43.5]], "Due within 45 days of the final EIS (Sec. 1106).", ["bill"], ms(43.5, "Decision")),
+        r("esa", "ESA consultation (desert tortoise)", [[33, 37.5]], "Formal consultation is cut to 60 days and must finish by the final EIS (Sec. 1302).", ["bill"]),
+        r("nhpa", "Historic review (NHPA §106)", [[20, 42]], "Must finish when the final EIS does (Sec. 2301).", ["bill"]),
+        r("water", "Corps nationwide permit (if washes are regulated)", [[36, 38]], "Unchanged in length.", ["nwp2026"]),
+        r("lead", "Final plan and notice to proceed", [[43.5, 45.5]], "Assumes the same 2 months. Outstanding federal approvals are due within 90 days of the final EIS (Sec. 1106), though whether that reaches a notice to proceed that depends on a final plan filed later is unsettled.", ["bill"], A),
+        B.window(43.5),
+        r("build", "Construction", [[45.5, 67.5]], "Same 22 months.", [], ms(67.5, "In service", true))
+      ]
+    },
+    contested: {
+      max: 120, tick: 12,
+      takeaway: "Under current law a solar project can wait years for a final EIS and decision, as Bonanza has, and months for later approvals, as Libra did in 2025. Under the bill, outstanding federal approvals are due within 90 days of the final EIS, which would sharply limit open-ended holds. Damages for a pattern of delay are harder to win than they look: the sponsor must show a substantial increase in delays over the prior five years, which include the current slowdown, and that the government created the pattern intentionally.",
+      short: "When BLM holds the file, the NOI and decision deadlines cut nearly three years.",
+      current: [
+        S.dev,
+        r("lead", "BLM processing to NOI, with Secretary-level clearance", [[12, 36]], "No deadline. Bonanza Solar took 30 months from its December 2020 application to its June 2023 NOI, a wait that included a variance review the 2024 Western Solar Plan eliminated. Mosey Solar's December 2021 application was recorded as complete in July 2026, the same day as its NOI; BLM's case records show the developer's last answer to BLM's questions in April 2023, 39 months earlier. Since July 2025, NOIs also need Secretary-level clearance.", ["bonanzaNoi", "dashMil", "doimemo"], A),
+        r("lead", "EIS, during the 2025 to 2026 slowdown", [[36, 74]], "Bonanza Solar's NOI came in June 2023 and its final EIS in August 2026, 16 months after the April 2025 target in its draft EIS notice. On the Permitting Dashboard the target was June 5, 2025, the 2-year deadline, and BLM gives internal agency factors as the reason. Assumes the same 38 months.", ["bonanzaNoi", "bonanzaDeis", "bonanzaFeis", "dashMil"], A),
+        r("lead", "Protests and Secretary-level sign-off", [[74, 80]], "Assumes 6 months. Bonanza's protest period closed in September 2026 and its decision is pending. Mosey Solar's revised federal schedule allows 6 months from final EIS to decision.", ["bonanzaFeis", "mosey"], ms(80, "Decision", true)),
+        r("lead", "Hold on later approvals", [[80, 86]], "BLM advanced no utility-scale solar projects for five months after the July 2025 memo; Libra Solar, approved in 2024, was the first to advance, in December 2025. BLM offered right-of-way grants within 2.4 months of the decision for six solar projects decided from 2020 to 2024, but took 4 and 5.5 months for Rough Hat Clark and Jove, both decided in January 2025; Rough Hat Clark's and Libra's first notices to proceed came in April 2026. Assumes a 6-month hold before the notice to proceed.", ["libra", "libraBlm", "blmCases"], A),
+        r("esa", "ESA consultation (desert tortoise)", [[62, 68]], "Assumes 6 months. The July 2025 memo also routes biological opinions through the Secretary's office.", ["doimemo"], A),
+        r("nhpa", "Historic review (NHPA §106)", [[36, 80]], "No overall deadline. Assumes the agreement is signed by the decision.", ["nhpa"], A),
+        r("water", "Corps nationwide permit (if washes are regulated)", [[72, 76]], "Assumes 4 months. A September 2025 Army memo deprioritized permits for projects with low energy output per acre; " + MEMO_ENJ, ["renew", "crsappeal"], A),
+        r("lit", "Window to sue over the approval", [[80, 152, "win"]], "Six-year default limit, or 2 years for FAST-41 projects.", ["sol", "fast41"]),
+        r("lit", "District court suit", [[82, 94]], "Solar EISs finished from 2010 to 2018 were sued more often than any other energy type, nearly two thirds of them, but after the suits over BLM's 2010 and 2011 fast-track approvals, RFF found no suit filed after early 2014 that challenged a BLM wind or solar NEPA decision in its sample, so a suit is not a given. RFF found most suits are filed within 120 days of the decision and district courts take about a year.", ["bennon", "rff15"], A),
+        r("lit", "Appeal", [[94, 118]], "RFF found appeals commonly took at least two more years. Defendants won 18 of 22 solar cases, litigated wind and solar projects reached operation in about the same time as unlitigated ones (41 months either way), and in several cases developers built while suits were pending.", ["rff15"], A),
+        r("build", "Construction", [[86, 108]], "Same 22 months, built while the suit is pending.", [], ms(108, "In service", true))
+      ],
+      baaja: [
+        S.dev,
+        r("lead", "Completeness review and NOI", [[12, 20]], B.late(20, "30 days to find the application complete and 90 more to issue the NOI"), ["bill"], A),
+        r("lead", "EIS, from NOI to final EIS", [[20, 48]], EIS_LATE, ["bill"], A),
+        B.deadlineSuit(44, 48, PAT("solar projects") + " The comparison is with the prior five years, which include the 2025 to 2026 slowdown."),
+        r("lead", "Court-ordered record of decision", [[48, 50]], "Assumes the decision comes at the end of the 60 days the court allows.", ["bill"], ms(50, "Decision", true)),
+        r("esa", "ESA consultation (desert tortoise)", [[42, 48]], "Must finish by the final EIS (Sec. 1302).", ["bill"]),
+        r("nhpa", "Historic review (NHPA §106)", [[20, 48]], "Must finish when the final EIS does (Sec. 2301).", ["bill"]),
+        r("water", "Corps nationwide permit (if washes are regulated)", [[48, 51]], "Due within 90 days of the final EIS (Sec. 1106).", ["bill"]),
+        r("lead", "Final plan and notice to proceed", [[50, 51]], "Outstanding federal approvals are due within 90 days of the final EIS (Sec. 1106). That clearly covers the right-of-way grant; whether it reaches a notice to proceed that depends on a final plan filed later is unsettled. Assumes it does.", ["bill"], A),
+        B.window(50),
+        B.suit(51),
+        B.remand(60),
+        B.stop(60, "Possible stop on an ESA or land-law claim", "Courts can still halt work over ESA or FLPMA violations."),
+        r("build", "Construction", [[51, 73]], "Same 22 months, uninterrupted unless an ESA or land-law claim succeeds.", [], ms(73, "In service", true))
+      ],
+      extra: "Up to 6 months later if an ESA or land-law claim stops work"
+    }
+  };
+
+  // ---------- Interstate transmission line ----------
+  const T = {};
+  T.dev = r("dev", "Developer route studies and application materials", [[0, 8]], "Assumed at 8 months under both regimes.", [], A);
+  const PA_LIMIT = "Carrying out a signed programmatic agreement is no longer a separate undertaking, and parties that did not sign it cannot sue over how it is carried out (Sec. 2301).";
+  const TX_WINDOW = "150 days to sue (Secs. 1110, 2201). NEPA claims, and under Sec. 2101 challenges to other federal approvals for the line, go to the court of appeals.";
+
+  const tx = {
+    smooth: {
+      max: 96, tick: 12,
+      takeaway: "For an interstate line, the bill changes little when agencies meet deadlines. State siting, historic property treatment plans and work after the decision set the pace. A new categorical exclusion for lines in approved corridors could shorten the federal review, but agencies must first write it.",
+      short: "State siting, historic treatment plans and work after the decision set the pace; the bill saves about a month and a half.",
+      current: [
+        T.dev,
+        r("lead", "BLM and Forest Service processing to NOI", [[8, 12]], "No deadline. SunZia took about 8 months and TransWest about 37 months from application to NOI. Greenlink West took 21 months: 6 to a complete application and 15 more to the NOI. Assumes 12 months in total.", ["sunziaFR", "transwest", "blmCases"], A),
+        r("lead", "EIS, from NOI to final EIS", [[12, 34]], "Current law requires the EIS within 2 years of the earliest of the EIS determination, the right-of-way completeness notice or the NOI. Assumes the notice comes with the NOI and the deadline is met. Before the deadline, transmission EISs took a median 3.7 years and an average 4.3 years from NOI to decision (33 lines, 2010 to 2020), with each 100 miles of length adding about 5 months.", ["nepadl", "niskanen"], A),
+        r("lead", "Protests, governor's review and decision", [[34, 36]], "Assumes 2 months.", ["blmplan"], ms(36, "Decision", true)),
+        r("other", "State siting approvals", [[18, 42]], "Each state runs its own siting or need proceeding, which often finishes after the federal decision. Assumes 2 years.", [], A),
+        r("esa", "ESA consultation", [[27, 33]], "Regulations allow 90 days of formal consultation, extendable 60 days without the applicant's consent, plus 45 days for the biological opinion.", ["esa"]),
+        r("nhpa", "Historic review: programmatic agreement", [[12, 36]], "Long lines use a programmatic agreement signed by the decision, with historic sites identified in phases.", ["nhpa"]),
+        r("nhpa", "Historic review: treatment plans before construction", [[36, 48]], "Treatment plans for each segment come before each notice to proceed. In 2025 the Ninth Circuit let tribes challenge SunZia's notices to proceed under its programmatic agreement. Section 106 has no overall deadline; Boardman to Hemingway's eligibility studies alone took more than five years. Assumes 12 months.", ["sunzia9th", "bpc106"], A),
+        r("lead", "Right-of-way grants", [[36, 38]], "Greenlink West, Gateway South and Boardman to Hemingway got their grants within 2 months of the decision; TransWest's took about 6 months and SunZia's about 19. Assumes 2 months.", ["blmCases", "transwest", "sunziaWECC"], A),
+        r("water", "Corps nationwide permit 57 and state water certifications", [[38, 44]], "Under Nationwide Permit 57, each separate and distant crossing can qualify as its own project; across all nationwide permits, verifications averaged 55 days in FY2024. States have up to a year to certify water quality. Assumes 6 months once engineering is final.", ["nwp2026", "cwa"], A),
+        r("lead", "Final plans and notices to proceed", [[44, 48]], "Assumes 4 months.", [], A),
+        r("lit", "Window to sue over the approval", [[36, 108, "win"]], "Six-year default limit, or 2 years for FAST-41 projects. Later notices to proceed can be challenged separately.", ["sol", "fast41", "sunzia9th"]),
+        r("build", "Construction", [[48, 78]], "Assumes 30 months. SunZia began construction in 2023, was energized in 2025 and was scheduled to reach full commercial operation in mid-2026.", ["sunziaWECC"], ms(78, "In service", true))
+      ],
+      baaja: [
+        T.dev,
+        r("lead", "Completeness review and NOI", [[8, 11]], "60 days to find the application complete, then up to 60 days to issue the NOI (Sec. 1109). Assumes the completeness notice at month 10 and the NOI a month later.", ["bill"], A),
+        r("lead", "EIS, from NOI to final EIS", [[11, 33]], "Held at the same 22 months, inside the 2-year deadline that runs from the completeness notice (Sec. 1106). A new categorical exclusion for lines in approved corridors, including Section 368 energy corridors, is not assumed because agencies must first write it (Sec. 2214).", ["bill"]),
+        r("lead", "Record of decision", [[33, 34.5]], "Due within 45 days of the final EIS (Sec. 1106).", ["bill"], ms(34.5, "Decision")),
+        r("other", "State siting approvals", [[18, 42]], "Unchanged when states act on time. For lines of 345 kV or more the developer can file with FERC as soon as it files with the state, and FERC can issue a permit if a state has not acted within a year (Sec. 2101). Not needed here.", ["bill"], A),
+        r("esa", "ESA consultation", [[26, 31]], "Formal consultation is cut to 60 days and must finish by the final EIS (Sec. 1302).", ["bill"]),
+        r("nhpa", "Historic review: programmatic agreement", [[11, 33]], "Must finish when the final EIS does (Sec. 2301).", ["bill"]),
+        r("nhpa", "Historic review: treatment plans before construction", [[34.5, 46.5]], "Held at the same 12 months. " + PA_LIMIT, ["bill"], A),
+        r("lead", "Right-of-way grants", [[33, 36]], "Due within 90 days of the final EIS (Sec. 1106).", ["bill"]),
+        r("water", "Corps nationwide permit 57 and state water certifications", [[36.5, 42.5]], "Held at the same 6 months. The Corps must keep nationwide permits for utility line crossings with discharges under 2 acres per project, and state certification for transmission lines is capped at 9 months and limited to direct point source discharges (Secs. 1202, 1204).", ["bill"], A),
+        r("lead", "Final plans and notices to proceed", [[42.5, 46.5]], "Assumes the same work, finishing with the treatment plans.", [], A),
+        r("lit", "Window to sue over the approval", [[34.5, 39.5, "win"]], TX_WINDOW, ["bill"]),
+        r("build", "Construction", [[46.5, 76.5]], "Same 30 months.", [], ms(76.5, "In service", true))
+      ]
+    },
+    contested: {
+      max: 216, tick: 24,
+      takeaway: "State siting is the largest risk for a multistate line, and current law offers no general federal fallback: FERC's backstop requires a national-interest corridor, and DOE dropped all three proposed corridors in August 2026. The bill lets FERC permit a line if a state has not acted within a year or has denied it, with no corridor needed. FERC has never issued a backstop permit, so the 30-month proceeding is an assumption, based on FERC's median for certificating large new gas pipelines, and financing and route work the bill does not touch still take years.",
+      short: "FERC can permit a line a state will not site. With the federal deadlines, that saves eight years.",
+      current: [
+        T.dev,
+        r("lead", "BLM processing to NOI, with amended applications", [[8, 37]], "TransWest took about 37 months from its 2007 application to its 2011 NOI, with several amendments.", ["transwest"]),
+        r("lead", "EIS, with re-scoping and route changes", [[37, 89]], "TransWest took about 52 months from NOI to final EIS. Agencies can extend the 2-year deadline after consulting the applicant.", ["transwest", "nepadl"]),
+        r("lead", "Final EIS to decision", [[89, 108]], "SunZia and TransWest each took about 19 months from final EIS to decision.", ["sunziaFR", "sunziaWECC", "transwest"], ms(108, "Decision")),
+        r("other", "State siting: denials, appeals and refiling", [[24, 150]], "Grain Belt Express was denied in Missouri in 2015 and 2017 before winning approval on remand in 2019. Boardman to Hemingway's main state approvals came by June 2023, about 15.5 years after its federal application. FERC's backstop cannot be used without a national-interest corridor, and DOE dropped all three proposed corridors in August 2026.", ["grainbelt", "b2h", "nietc", "crsnietc"], A),
+        r("esa", "ESA consultation", [[76, 90]], "Assumes 14 months with extensions.", ["esa"], A),
+        r("nhpa", "Historic review: programmatic agreement", [[37, 108]], "No overall deadline; signed by the decision.", ["nhpa"]),
+        r("nhpa", "Historic review: treatment plans before construction", [[152, 176]], "Assumes 24 months once state approvals fix the route.", ["sunzia9th"], A),
+        r("lead", "Right-of-way grants", [[108, 127]], "SunZia's grant came about 19 months after its decision.", ["sunziaWECC"]),
+        r("dev", "Financing, contracts and route amendments", [[150, 178]], "TransWest's notice to proceed came about 76 months after its decision. SunZia began construction more than 8 years after its decision, after a second EIS and amended decision for route changes (2021 to 2023).", ["transwest", "sunziaWECC", "sunziaAmend"], A),
+        r("water", "Corps and state water permits", [[170, 180]], "Boardman to Hemingway's Corps permit came about 14 months after its January 2023 application and 3 months after the application was complete, 18 months past the original target. Assumes 10 months once engineering is final.", ["dashMil", "nwp2026", "cwa"], A),
+        r("lead", "Notices to proceed", [[178, 184]], "Assumes 6 months.", [], A),
+        r("lit", "Window to sue over the approval", [[108, 180, "win"]], "Six-year default limit. Notices to proceed can be challenged separately.", ["sol", "sunzia9th"]),
+        r("lit", "Possible vacatur on a land-law claim", [[110, 134, "possible"]], "Cardinal-Hickory Creek's January 2020 decision was vacated in March 2022 over the line's crossing of a national wildlife refuge, the appeal ran into 2023, and the line was not fully energized until September 2024. Not counted.", ["bpcJR"]),
+        r("lit", "Lawsuit over notices to proceed, no injunction", [[186, 210]], "Tribes and preservation groups sued over SunZia's notices to proceed in January 2024. The Ninth Circuit revived the case in May 2025, after much of the disputed segment had been built. Assumes 24 months without an injunction.", ["sunzia9th"], A),
+        r("build", "Construction", [[184, 214]], "Same 30 months. SunZia took about 17 years from application to energization.", ["sunziaFR", "sunziaWECC"], ms(214, "In service", true))
+      ],
+      baaja: [
+        T.dev,
+        r("lead", "Completeness review and NOI", [[8, 16]], B.late(16, "60 days to find the application complete and 60 more to issue the NOI"), ["bill"], A),
+        r("lead", "EIS, from NOI to final EIS", [[16, 44]], EIS_LATE, ["bill"], A),
+        B.deadlineSuit(40, 44, PAT("transmission projects")),
+        r("lead", "Court-ordered record of decision", [[44, 46]], "Assumes the decision comes at the end of the 60 days the court allows.", ["bill"], ms(46, "Decision", true)),
+        r("other", "State siting review (no decision within a year)", [[24, 36]], "Assumes a state does not act on the application.", [], A),
+        r("lead", "FERC backstop permit", [[24, 54]], "For a line of 345 kV or more, the developer can file with FERC when it files with the state. FERC can permit a line of 230 kV or more if the state has not acted within a year, has denied it, or has approved it with conditions that make it infeasible, with no corridor designation needed (Sec. 2101). FERC has never issued one. Assumes 30 months, about how long FERC takes on large new gas pipelines: a median 31 months from approving pre-filing to issuing a certificate (10 projects, 2014 to 2023; range 24 to 39).", ["bill", "crsnietc", "fercPipes"], A),
+        r("esa", "ESA consultation", [[38, 44]], "Must finish by the final EIS (Sec. 1302).", ["bill"]),
+        r("nhpa", "Historic review: programmatic agreement", [[16, 44]], "Must finish when the final EIS does (Sec. 2301).", ["bill"]),
+        r("nhpa", "Historic review: treatment plans before construction", [[54, 78]], "Held at 24 months once the route is fixed. " + PA_LIMIT, ["bill"], A),
+        r("lead", "Right-of-way grants", [[44, 47]], "Due within 90 days of the final EIS (Sec. 1106).", ["bill"]),
+        r("dev", "Financing, contracts and route amendments", [[54, 82]], "Held at the same 28 months, starting once FERC's permit settles the route.", [], A),
+        r("water", "Corps and state water permits", [[73, 82]], "The Corps must keep nationwide permits for utility line crossings, and state certification for transmission lines is capped at 9 months (Secs. 1202, 1204).", ["bill"]),
+        r("lead", "Notices to proceed", [[82, 88]], "Same 6 months.", [], A),
+        r("lit", "Window to sue over the approval", [[46, 51, "win"]], TX_WINDOW + " Challenges to FERC's permit follow the Federal Power Act's rehearing process.", ["bill"]),
+        r("lit", "Lawsuit over notices to proceed", [[89, 98]], "Assumes a suit within 150 days of the notices, decided about nine months later, that remands without stopping work. A SunZia-style historic preservation claim would likely be barred: " + PA_LIMIT, ["bill"], A),
+        B.remand(98),
+        B.stop(98, "Possible stop on an ESA or land-law claim", "Courts can still halt work over ESA, refuge or FLPMA violations; a refuge-crossing claim like Cardinal-Hickory Creek's is not a NEPA claim, so the bill would not bar vacatur there."),
+        r("build", "Construction", [[88, 118]], "Same 30 months.", [], ms(118, "In service", true))
+      ],
+      extra: "Up to 6 months later if an ESA or land-law claim stops work"
+    }
+  };
+
+  // ---------- Offshore wind (Atlantic) ----------
+  const O = {};
+  O.dev = r("dev", "Developer responds to COP information requests", [[0, 4]], "Assumed at 4 months under both regimes. Site surveys and the COP itself take 3 to 5 years before month 0.", ["epsilon"], A);
+
+  const osw = {
+    smooth: {
+      max: 72, tick: 6,
+      takeaway: "Before 2025, no Atlantic project finished its final EIS within two years of the NOI. If both regimes meet their deadlines, the bill's gain is modest: a shorter review before the NOI, a 2-year clock that starts when BOEM finds the COP complete, and a faster decision and COP approval. State coastal reviews are not covered by the bill's deadlines and can become the last step.",
+      short: "A shorter wait for the NOI and a faster approval save five and a half months.",
+      current: [
+        O.dev,
+        r("lead", "BOEM review to notice of intent (NOI)", [[4, 10]], "No deadline. Eight Atlantic projects with COPs submitted from 2017 to 2021 took a median 10.2 months from COP submission to NOI.", ["boem"]),
+        r("lead", "EIS, from NOI to final EIS", [[10, 34]], "Since 2023, NEPA has required an EIS within 2 years of the EIS determination or NOI; a COP is not a right-of-way application, so its completeness does not start the clock. Assumes the deadline is met. Before 2025, no Atlantic project finished its final EIS within 2 years of its NOI; the fastest took about 26 months.", ["nepadl", "boem"], A),
+        r("lead", "Record of decision and COP approval", [[34, 38.5]], "Medians of 1.4 months from final EIS to the joint decision and 2.9 months from decision to COP approval.", ["boem", "liskow"], ms(38.5, "COP approved")),
+        r("esa", "Marine mammal incidental take rule", [[14, 32]], "No statutory deadline for multiyear incidental take rules. Seven projects with final rules in 2023 and 2024 took 16 to 24 months (median about 18) from notice of the application to a final rule.", ["mmpa"]),
+        r("esa", "ESA consultation", [[20, 33]], "Regulations allow 90 days of formal consultation, extendable, plus 45 days for the biological opinion; BOEM and NMFS agreed on 150 days for offshore wind. Nine Atlantic projects took a median 14 months from BOEM's first draft biological assessment to the opinion, about 5 of them in formal consultation, and 10 of 11 opinions came before the final EIS. Assumes 13 months, ending a month before the final EIS.", ["esa", "revwOp", "noaaOps"], A),
+        r("nhpa", "Historic review (NHPA §106)", [[10, 35.5]], "Runs with the EIS, with the agreement signed before the decision. Visual effects on historic coastal properties have been the main dispute.", ["nhpa"]),
+        r("other", "State coastal consistency review", [[24, 34]], "States have 6 months, extendable by agreement, and their concurrence, or presumed concurrence, is required before COP approval. Rhode Island's review of Revolution Wind took about 21 months under extensions. Assumes 10 months.", ["czma", "crmc"], A),
+        r("other", "EPA air permit for construction vessels", [[14, 31]], "The Clean Air Act requires a decision within a year of a complete application. Revolution Wind's permit took about 17 months from its first application.", ["epaRev"]),
+        r("water", "Army Corps permit (§10 and §404)", [[12, 38.5]], "Decided in the joint record of decision and issued at or after COP approval.", ["boem"], A),
+        r("lead", "BSEE design and fabrication reports", [[34.5, 38.5]], "BSEE has 20 business days to accept the reports. For reports filed before COP approval, installation can begin once BSEE does not object, or 60 business days after COP approval if it raises no objection. Assumes BSEE clears them by COP approval.", ["bsee"], A),
+        r("lit", "Window to sue over the approval", [[35.5, 59.5, "win"]], "Offshore wind projects have been covered by FAST-41, which sets a 2-year limit on suits.", ["fast41"]),
+        r("build", "Construction to first power", [[39.5, 65.5]], "Revolution Wind reached first power about 28 months after COP approval; South Fork and Vineyard Wind took about 23 and 30. Assumes 26 months.", ["revwind"], ms(65.5, "First power", true))
+      ],
+      baaja: [
+        O.dev,
+        r("lead", "Completeness review and NOI", [[4, 7]], "60 days to find the COP complete, then up to 60 days to issue the NOI (Sec. 1109). Assumes the completeness notice at month 6 and the NOI a month later.", ["bill"], A),
+        r("lead", "EIS, from NOI to final EIS", [[7, 30]], "Due 2 years after the COP completeness notice, a trigger current law does not use for COPs. Extensions now need the sponsor's approval (Sec. 1106). Assumes the deadline is met, 23 months after the NOI.", ["bill"], A),
+        r("lead", "Record of decision and COP approval", [[30, 33]], "The decision is due within 45 days of the final EIS and other outstanding approvals within 90 days (Sec. 1106).", ["bill"], ms(33, "COP approved")),
+        r("esa", "Marine mammal incidental take rule", [[11, 29]], "Held at the same length; due within 90 days of the final EIS if NMFS takes part in the review (Sec. 1106).", ["bill"], A),
+        r("esa", "ESA consultation", [[22, 29]], "Formal consultation is cut to 60 days and must finish by the final EIS (Sec. 1302). Ten of 11 recent offshore wind opinions already came before the final EIS, after a median of 155 days of formal consultation.", ["bill", "noaaOps"]),
+        r("nhpa", "Historic review (NHPA §106)", [[7, 30]], "Must finish when the final EIS does. Visual effects count only if they directly and significantly diminish what makes a property eligible (Sec. 2301).", ["bill"]),
+        r("other", "State coastal consistency review", [[20, 30]], "Unchanged. State coastal reviews are not covered by the bill's federal deadlines and must still conclude before COP approval.", ["czma"], A),
+        r("other", "EPA air permit for construction vessels", [[11, 28]], "Same 17 months.", ["epaRev"], A),
+        r("water", "Army Corps permit (§10 and §404)", [[9, 33]], "Due within 90 days of the final EIS (Sec. 1106).", ["bill"]),
+        r("lead", "BSEE design and fabrication reports", [[29, 33]], "Unchanged.", ["bsee"], A),
+        r("lit", "Window to sue over the approval", [[31.5, 36.5, "win"]], "150 days to sue (Secs. 1110, 2201, 2301).", ["bill"]),
+        r("build", "Construction to first power", [[34, 60]], "Same 26 months.", [], ms(60, "First power", true))
+      ]
+    },
+    contested: {
+      max: 108, tick: 12,
+      takeaway: "Since January 2025, offshore wind has faced a freeze on new reviews, reconsideration of approved plans and stop-work orders on projects under construction. The bill's deadlines and its limits on revoking or suspending approvals address each of these, with gaps: the 60-day steps to find a COP complete and issue the NOI have no expedited court remedy, the 2-year clock does not start until BOEM finds the COP complete, and whether a remand the agency itself requests can lead to a revocation is untested.",
+      short: "Deadlines and limits on revoking or pausing approvals cut nearly two years; the NOI steps have no expedited court remedy.",
+      current: [
+        O.dev,
+        r("lead", "BOEM review to NOI", [[4, 22]], "No deadline. US Wind's Maryland project took about 22 months from COP to NOI. BOEM has published no NOI for an offshore wind COP since January 15, 2025, even after a court vacated the federal pause on wind permits in December 2025.", ["boem", "nyTrump"], A),
+        r("lead", "Possible further freeze before the NOI", [[22, 34, "possible"]], "Under current practice the freeze has no end date. BOEM's FAST-41 schedule for Vineyard Mid-Atlantic, the last project to get an NOI, now runs to March 2029 after extensions in October 2025 and June 2026, and 14 of 46 covered projects had timetables extended by more than a year as of March 2026. Not counted.", ["tracker", "vma", "pcQ2"]),
+        r("lead", "EIS, with extensions", [[22, 58]], "SouthCoast Wind took about 36 months from NOI to final EIS. Agencies can extend the 2-year deadline after consulting the applicant. BOEM's current schedule for Vineyard Mid-Atlantic puts its final EIS in April 2028, about 39 months after its January 2025 NOI and a year later than first planned, citing internal agency factors.", ["boem", "nepadl", "dashMil"]),
+        r("lead", "Record of decision and COP approval", [[58, 63]], "Assumes about the same 5 months as recent projects.", ["boem"], ms(63, "COP approved", true)),
+        r("esa", "Marine mammal incidental take rule", [[26, 64]], "SouthCoast Wind's proposed rule from June 2024 was still not final in 2026, and NMFS has issued no final incidental take rule for an offshore wind farm since January 2025. Assumes 38 months.", ["scmmpa", "mmpa"], A),
+        r("esa", "ESA consultation", [[44, 58]], "Assumes 14 months, the median from BOEM's first draft biological assessment to the opinion for nine Atlantic projects (12 to 25 months).", ["esa", "noaaOps"], A),
+        r("nhpa", "Historic review (NHPA §106)", [[22, 59.5]], "Runs with the EIS.", ["nhpa"]),
+        r("other", "State coastal consistency review", [[40, 50]], "Assumes 10 months.", ["czma"], A),
+        r("other", "EPA air permit for construction vessels", [[30, 47]], "Assumes the same 17 months as Revolution Wind.", ["epaRev"], A),
+        r("water", "Army Corps permit (§10 and §404)", [[24, 63]], "Issued at or after COP approval.", [], A),
+        r("lead", "Possible reconsideration of the approved COP", [[63, 76, "possible"]], "Since 2025 the government has asked courts to send approved COPs back for reconsideration. Courts agreed for SouthCoast Wind in November 2025 and Atlantic Shores in August 2026, and refused for US Wind's Maryland project in December 2025. Not counted.", ["tracker"]),
+        r("lead", "Federal stop-work orders", [[70, 71], [80, 81]], "Interior stopped Empire Wind in April 2025 (lifted a month later) and Revolution Wind in August 2025 (enjoined a month later), then suspended five projects under construction in December 2025. Courts blocked all five December orders within three to six weeks. Assumes two stops of a month each.", ["tracker", "troutman"], A),
+        r("lit", "Window to sue over the approval", [[59.5, 83.5, "win"]], "FAST-41's 2-year limit.", ["fast41"]),
+        r("lit", "Third-party lawsuits, no injunction", [[61, 97]], "Assumes suits filed within the 2-year window that run about 3 years without stopping construction. CATF found offshore wind NEPA cases averaged about 2.5 years with appeals, plaintiffs won 1 of 15 completed cases, and none of 7 injunction motions was granted.", ["catfOSW"], A),
+        r("build", "Construction to first power", [[64, 70], [71, 80], [81, 92]], "Same 26 months of work, paused by the two stop-work orders.", [], ms(92, "First power", true))
+      ],
+      baaja: [
+        O.dev,
+        r("lead", "Completeness review and NOI", [[4, 12]], B.late(12, "60 days to find the COP complete and 60 more to issue the NOI"), ["bill"], A),
+        r("lead", "EIS, from NOI to final EIS", [[12, 40]], EIS_LATE, ["bill"], A),
+        B.deadlineSuit(36, 40, PAT("offshore wind projects")),
+        r("lead", "Record of decision and COP approval", [[40, 43]], "The decision is due within 60 days of the court's order and other outstanding approvals within 90 days of the final EIS (Sec. 1106). The bill also writes an \"unreasonable interference\" standard into OCSLA, displacing the stricter reading in a 2025 Solicitor's opinion (Sec. 2251).", ["bill"], ms(43, "COP approved", true)),
+        r("esa", "Marine mammal incidental take rule", [[16, 43]], "Due within 90 days of the final EIS if NMFS takes part in the review (Sec. 1106).", ["bill"], A),
+        r("esa", "ESA consultation", [[34, 40]], "Must finish by the final EIS (Sec. 1302). Ten of 11 recent offshore wind opinions already came before the final EIS, after a median of 155 days of formal consultation.", ["bill", "noaaOps"]),
+        r("nhpa", "Historic review (NHPA §106)", [[12, 40]], "Must finish when the final EIS does. Visual effects count only if they directly and significantly diminish what makes a property eligible (Sec. 2301).", ["bill"]),
+        r("other", "State coastal consistency review", [[30, 40]], "Unchanged. State coastal reviews are not covered by the bill's federal deadlines.", ["czma"], A),
+        r("other", "EPA air permit for construction vessels", [[16, 33]], "Same 17 months.", ["epaRev"], A),
+        r("water", "Army Corps permit (§10 and §404)", [[14, 43]], "Due within 90 days of the final EIS (Sec. 1106).", ["bill"]),
+        r("lead", "Possible reconsideration of the approved COP", [[43, 49, "possible"]], "The court-order exception applies only when a court order requires the action. A remand the agency itself requests usually lets it reconsider without requiring a change, so a later revocation would likely need another exception (Sec. 1401); no court has ruled on this. Courts almost always grant voluntary remand even over the sponsor's objection, and the bill, unlike the FREEDOM Act, does not require the sponsor's consent before the government asks for one. Reconsideration on remand must finish within 180 days (Sec. 2201). Not counted.", ["bill", "ifpCert"]),
+        r("lead", "Possible stop-work order", [[50, 51, "possible"]], "Allowed only on a court order, material breach or violation of law, fraud, the holder's request, or specific, urgent harm based on new information, and the agency must prove the exception by clear and convincing evidence. If it fails, the court can award delay costs plus 25% to 50% of project costs incurred to date (Sec. 1401). Not counted.", ["bill"]),
+        B.window(42),
+        B.suit(43),
+        B.remand(52),
+        B.stop(52, "Possible stop on an ESA or marine mammal claim", "Courts can still halt work over ESA or Marine Mammal Protection Act violations."),
+        r("build", "Construction to first power", [[44, 70]], "Same 26 months, uninterrupted.", [], ms(70, "First power", true))
+      ],
+      extra: "Up to 6 months later if an ESA or marine mammal claim stops work"
+    }
+  };
+
+  const PROJECTS = {
+    pipeline: { brief: "New interstate gas pipeline · month 0 is the start of FERC pre-filing", name: "Gas pipeline", end: "In service", axis: "Months from the start of FERC pre-filing", max: 72, tick: 6, data: pipe,
+      desc: "A new interstate natural gas pipeline that needs a FERC certificate, a state water quality certification and federal land and Corps permits. Month 0 is the start of FERC pre-filing." },
+    geothermal: { brief: "Geothermal plant on BLM land · month 0 is the lease nomination", name: "Geothermal", end: "In service", axis: "Months from lease nomination", max: 84, tick: 12, data: geo,
+      desc: "A geothermal power plant on BLM land, from lease nomination through exploration, development review and construction. Month 0 is the lease nomination." },
+    wind: { brief: "300 to 1,000 MW wind farm on BLM land · month 0 is the right-of-way application", name: "Onshore wind", end: "In service", axis: "Months from the BLM right-of-way application", max: 120, tick: 12, data: wind,
+      desc: "A 300 to 1,000 MW wind farm mostly on BLM land in the West, with a short line to the grid. Month 0 is the right-of-way application; wildlife surveys usually start years earlier." },
+    solar: { brief: "Large solar and storage project on BLM land · month 0 is the right-of-way application", name: "Solar", end: "In service", axis: "Months from the BLM right-of-way application", max: 120, tick: 12, data: solar,
+      desc: "A large solar and storage project on BLM land in the desert Southwest that needs an EIS. Month 0 is the right-of-way application." },
+    transmission: { brief: "Multistate high-voltage line on federal and private land · month 0 is the federal application", name: "Transmission", end: "In service", axis: "Months from the federal right-of-way application", max: 216, tick: 24, data: tx,
+      desc: "A new interstate high-voltage line several hundred miles long, crossing BLM and Forest Service land and private land in several states. Month 0 is the federal right-of-way application." },
+    offshore: { brief: "800 to 1,200 MW Atlantic wind farm · month 0 is COP submission", name: "Offshore wind", end: "First power", axis: "Months from COP submission", max: 108, tick: 12, data: osw,
+      desc: "An 800 to 1,200 MW wind farm on an existing Atlantic lease, with an export cable to shore. Month 0 is submission of the construction and operations plan (COP), after 3 to 5 years of site surveys." }
+  };
+  const SCEN = { smooth: "Deadlines met", contested: "Delays and challenges" };
+
+  // Months each BAAJA provision saves, from waterfall_model.py: each value is the provision's average
+  // contribution across every order in which the provisions could take effect (Shapley value).
+  const WF = {"pipeline":{"smooth":{"current":44,"baaja":43,"total":1,"items":[{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":1.0,"alone":1,"last":1,"note":"The certificate is due within 45 days of the final EIS instead of about 4 months. Construction still waits for the other federal permits, due 90 days after the final EIS under both regimes, so the gain is 1 month."}],"zero":"No effect on the date here: water permits (Secs. 1202, 1204), ESA consultation (Sec. 1302) and historic review (Sec. 2301). Each shortens its own step, but that step was not what held up construction.","zshort":"Saves no time here: water permits (Secs. 1202, 1204), ESA consultation (Sec. 1302) and historic review (Sec. 2301).","overlap":""},"contested":{"current":64,"baaja":43,"total":21,"items":[{"id":"court","label":"Limits on court remedies: remand without vacatur, no injunctions on NEPA or historic review claims","sec":"Secs. 1110, 1205, 2301","months":12.0,"alone":12,"last":12,"note":"Under current law a court vacates a federal permit and work stops for the 12 months it takes to reissue it. Under the bill the permit is remanded and stays in effect for NEPA, historic review and §404 claims, so work continues."},{"id":"water","label":"State water certification cap and nationwide permits","sec":"Secs. 1202, 1204","months":7.5,"alone":6,"last":9,"note":"The 9-month cap on state water certification runs from the request, replacing a year that starts only after FERC's final EIS. That moves construction up 6 months on its own and 9 once the federal permits also come on time."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":1.5,"alone":0,"last":3,"note":"The certificate within 45 days and other federal permits within 90 days of the final EIS. Saves nothing while the state certification is the last permit, and 3 months once it is not."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302) and historic review (Sec. 2301). Each shortens its own step, but that step was not what held up construction.","zshort":"Saves no time here: ESA consultation (Sec. 1302) and historic review (Sec. 2301).","overlap":"The court provisions save the same 12 months whatever else applies; the water certification cap and the federal permit deadlines overlap."}},"geothermal":{"smooth":{"current":61,"baaja":49,"total":12,"items":[{"id":"geoLease","label":"Annual geothermal lease sales","sec":"Sec. 2223","months":6.0,"alone":6,"last":6,"note":"Annual lease sales, with a replacement sale if one is canceled or delayed, cut the average wait for a lease from 12 months to 6."},{"id":"geoExpl","label":"Geothermal test wells outside NEPA","sec":"Secs. 1102, 2221","months":6.0,"alone":6,"last":6,"note":"Test wells disturbing up to 10 acres no longer need NEPA review, cutting exploration permits from about 7 months to 1."}],"zero":"No effect on the date here: short lines in corridors (Sec. 2229), ESA consultation (Sec. 1302) and historic review (Sec. 2301). Each shortens its own step, but that step was not what held up construction.","zshort":"Saves no time here: short lines in corridors (Sec. 2229), ESA consultation (Sec. 1302) and historic review (Sec. 2301).","overlap":""},"contested":{"current":76,"baaja":49,"total":27,"items":[{"id":"court","label":"Limits on court remedies: remand without vacatur, no injunctions on NEPA or historic review claims","sec":"Secs. 1110, 1205, 2301","months":15.0,"alone":15,"last":15,"note":"Under current law a 90-day injunction and a vacated approval stop work for 15 months while the EA is redone. Under the bill NEPA and historic review claims cannot support an injunction, and a flawed approval is remanded and stays in effect."},{"id":"geoLease","label":"Annual geothermal lease sales","sec":"Sec. 2223","months":6.0,"alone":6,"last":6,"note":"Annual lease sales, with a replacement sale if one is canceled or delayed, cut the average wait for a lease from 12 months to 6."},{"id":"geoExpl","label":"Geothermal test wells outside NEPA","sec":"Secs. 1102, 2221","months":6.0,"alone":6,"last":6,"note":"Test wells disturbing up to 10 acres no longer need NEPA review, cutting exploration permits from about 7 months to 1."}],"zero":"No effect on the date here: short lines in corridors (Sec. 2229), ESA consultation (Sec. 1302) and historic review (Sec. 2301). Each shortens its own step, but that step was not what held up construction.","zshort":"Saves no time here: short lines in corridors (Sec. 2229), ESA consultation (Sec. 1302) and historic review (Sec. 2301).","overlap":""}},"wind":{"smooth":{"current":58,"baaja":53.5,"total":4.5,"items":[{"id":"noi","label":"Deadlines to accept the application and issue the NOI","sec":"Sec. 2213","months":3.0,"alone":3,"last":3.0,"note":"BLM must find the application complete within 30 days and issue the NOI within 90. The completeness notice comes 3 months sooner, and the 2-year EIS clock starts with it."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":1.5,"alone":1.5,"last":1.5,"note":"The record of decision within 45 days of the final EIS instead of about 3 months."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302) and historic review (Sec. 2301). Each shortens its own step, but that step was not what held up construction.","zshort":"Saves no time here: ESA consultation (Sec. 1302) and historic review (Sec. 2301).","overlap":""},"contested":{"current":111,"baaja":65,"total":46,"items":[{"id":"eis","label":"2-year EIS deadline, extended only with the sponsor's approval","sec":"Sec. 1106","months":21.0,"alone":22,"last":22,"note":"The 2-year deadline can be extended only with the sponsor's approval, and the sponsor can sue when it passes. The final EIS comes 28 months after the completeness notice instead of 50 months after the NOI."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":16.0,"alone":14,"last":20,"note":"A court-ordered decision 60 days after the final EIS replaces 6 months of protests and 10 months of Secretary-level review, and the eagle permit and other approvals are due within 90 days. Without it, a faster EIS leaves construction waiting on the eagle permit."},{"id":"noi","label":"Deadlines to accept the application and issue the NOI","sec":"Sec. 2213","months":9.0,"alone":10,"last":10,"note":"The completeness and NOI deadlines start the review at month 14, even when missed by 4 months, instead of month 24."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302), historic review (Sec. 2301) and court remedies (Secs. 1110, 1205, 2301). Each shortens its own step, but that step was not what held up construction. Suits here do not stop construction under either regime; the court provisions matter for the possible stops the charts do not count.","zshort":"Saves no time here: ESA consultation (Sec. 1302), historic review (Sec. 2301) and court remedies (Secs. 1110, 1205, 2301).","overlap":"The EIS deadline and the decision deadlines depend on each other: a faster EIS gains less while the eagle permit runs on its own track."}},"solar":{"smooth":{"current":72,"baaja":67.5,"total":4.5,"items":[{"id":"noi","label":"Deadlines to accept the application and issue the NOI","sec":"Sec. 2213","months":4.0,"alone":4,"last":4.0,"note":"BLM must find the application complete within 30 days and issue the NOI within 90. That cuts BLM's 6 months of processing to 2, so the review starts at month 20 instead of 24."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":0.5,"alone":0.5,"last":0.5,"note":"The record of decision within 45 days of the final EIS instead of 2 months."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302) and historic review (Sec. 2301). Each shortens its own step, but that step was not what held up construction.","zshort":"Saves no time here: ESA consultation (Sec. 1302) and historic review (Sec. 2301).","overlap":"The NOI deadline's gain depends on who holds the file. Here BLM holds it for 6 months, about the median once an application is complete, because recent records show developers still answering BLM's questions up to a few months before the NOI. In a slowdown BLM holds it far longer, as in the Delays and challenges case."},"contested":{"current":108,"baaja":73,"total":35,"items":[{"id":"noi","label":"Deadlines to accept the application and issue the NOI","sec":"Sec. 2213","months":16.0,"alone":16,"last":16,"note":"The completeness and NOI deadlines start the review at month 20, even when missed by 4 months, instead of month 36."},{"id":"eis","label":"2-year EIS deadline, extended only with the sponsor's approval","sec":"Sec. 1106","months":10.0,"alone":10,"last":10,"note":"The 2-year deadline, extended only with the sponsor's approval and enforced by the sponsor's suit, ends the EIS 28 months after the completeness notice instead of 38 months after the NOI."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":9.0,"alone":9,"last":9,"note":"A court-ordered decision 2 months after the final EIS and outstanding approvals within 90 days replace 6 months of protests and Secretary-level sign-off and a 6-month hold on later approvals."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302), historic review (Sec. 2301) and court remedies (Secs. 1110, 1205, 2301). Each shortens its own step, but that step was not what held up construction. Suits here do not stop construction under either regime; the court provisions matter for the possible stops the charts do not count.","zshort":"Saves no time here: ESA consultation (Sec. 1302), historic review (Sec. 2301) and court remedies (Secs. 1110, 1205, 2301).","overlap":"The NOI deadline's gain depends on who holds the file. Here BLM holds it for 24 months, between Rough Hat Clark, where BLM took 15 months to ask its first question, and Mosey, where the NOI came 39 months after the developer's last answer."}},"transmission":{"smooth":{"current":78,"baaja":76.5,"total":1.5,"items":[{"id":"noi","label":"Deadlines to accept the application and issue the NOI","sec":"Sec. 1109","months":1.0,"alone":1,"last":1.0,"note":"60 days to find the application complete and 60 more to issue the NOI start the EIS a month sooner."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":0.5,"alone":0.5,"last":0.5,"note":"The record of decision within 45 days of the final EIS instead of 2 months."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302), historic review (Sec. 2301) and water permits (Secs. 1202, 1204). Each shortens its own step, but that step was not what held up construction.","zshort":"Saves no time here: ESA consultation (Sec. 1302), historic review (Sec. 2301) and water permits (Secs. 1202, 1204).","overlap":""},"contested":{"current":214,"baaja":118,"total":96,"items":[{"id":"ferc","label":"FERC siting permit when a state does not act, without a corridor","sec":"Sec. 2101","months":80.0,"alone":51,"last":96,"note":"Under current law state denials, appeals and refiling hold the route until month 150. The bill lets FERC permit the line once a state has not acted for a year, here by month 54. On its own that saves 51 months, because the federal right-of-way grants become the last approval; with the bill's federal deadlines it saves 96."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":6.5,"alone":0,"last":0,"note":"The decision within 45 days and the right-of-way grants within 90 days of the final EIS. Saves nothing on its own, because the state holds up the route, and nothing added last, because the other two federal deadlines already finish the federal approvals in time."},{"id":"eis","label":"2-year EIS deadline, extended only with the sponsor's approval","sec":"Sec. 1106","months":5.0,"alone":0,"last":0,"note":"The 2-year deadline with the sponsor's suit ends the EIS 28 months after the completeness notice instead of 52 months after the NOI. Saves nothing on its own or added last, for the same reasons."},{"id":"noi","label":"Deadlines to accept the application and issue the NOI","sec":"Sec. 1109","months":4.5,"alone":0,"last":0,"note":"The completeness and NOI deadlines start the review at month 16 instead of 37. Saves nothing on its own or added last, for the same reasons."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302), historic review (Sec. 2301), water permits (Secs. 1202, 1204) and court remedies (Secs. 1110, 1205, 2301). Each shortens its own step, but that step was not what held up construction. Suits here do not stop construction under either regime; the court provisions matter for the possible stops the charts do not count.","zshort":"Saves no time here: ESA consultation (Sec. 1302), historic review (Sec. 2301), water permits (Secs. 1202, 1204) and court remedies (Secs. 1110, 1205, 2301).","overlap":"The three federal deadlines overlap. None saves time on its own, because the state holds up the route, and none is needed if the other two apply. Together they save 45 months once FERC can permit the line; the chart splits that among them."}},"offshore":{"smooth":{"current":65.5,"baaja":60,"total":5.5,"items":[{"id":"noi","label":"Deadlines to accept the application and issue the NOI","sec":"Sec. 1109","months":3.5,"alone":3.0,"last":4,"note":"60 days to find the COP complete and 60 more to issue the NOI start the review at month 7 instead of 10."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":1.5,"alone":1.5,"last":1.5,"note":"The decision within 45 days and other approvals within 90 days of the final EIS cut the time to COP approval from 4.5 months to 3."},{"id":"eis","label":"2-year EIS deadline, extended only with the sponsor's approval","sec":"Sec. 1106","months":0.5,"alone":0.0,"last":1,"note":"The 2-year clock starts at the COP completeness notice, a month before the NOI. That gains time only when the notice itself comes on time."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302) and historic review (Sec. 2301). Each shortens its own step, but that step was not what held up construction.","zshort":"Saves no time here: ESA consultation (Sec. 1302) and historic review (Sec. 2301).","overlap":""},"contested":{"current":92,"baaja":70,"total":22,"items":[{"id":"noi","label":"Deadlines to accept the application and issue the NOI","sec":"Sec. 1109","months":10.0,"alone":10,"last":10,"note":"The completeness and NOI deadlines start the review at month 12, even when missed by 4 months, instead of month 22."},{"id":"dec","label":"Decision within 45 days, other federal permits within 90 days","sec":"Sec. 1106","months":6.0,"alone":2,"last":10,"note":"COP approval is due 3 months after the final EIS, and the marine mammal rule within 90 days of it. Without this, the marine mammal rule, which has taken more than three years, holds up construction even after a faster EIS."},{"id":"eis","label":"2-year EIS deadline, extended only with the sponsor's approval","sec":"Sec. 1106","months":4.0,"alone":0,"last":8,"note":"The 2-year deadline with the sponsor's suit ends the EIS 28 months after the completeness notice instead of 36 months after the NOI. On its own it saves nothing, because the marine mammal rule still sets the pace."},{"id":"durable","label":"Limits on revoking or suspending approvals","sec":"Sec. 1401","months":2.0,"alone":2,"last":2,"note":"Stop-work orders are allowed only in narrow cases the agency must prove, so the two one-month stops under current law do not happen."}],"zero":"No effect on the date here: ESA consultation (Sec. 1302), historic review (Sec. 2301) and court remedies (Secs. 1110, 1205, 2301). Each shortens its own step, but that step was not what held up construction. Suits here do not stop construction under either regime; the court provisions matter for the possible stops the charts do not count.","zshort":"Saves no time here: ESA consultation (Sec. 1302), historic review (Sec. 2301) and court remedies (Secs. 1110, 1205, 2301).","overlap":"The EIS deadline matters only alongside the decision deadlines: without the 90-day deadline for the marine mammal rule, that rule sets the pace."}}};
+  const RANGE = {"pipeline":{"approval":[2.5,2.5],"service":[1,21],"driver":"Courts and state water permits, not federal review"},"geothermal":{"approval":[12,12],"service":[12,27],"driver":"Leasing and test-well steps, plus courts"},"wind":{"approval":[4.5,46],"service":[4.5,46],"driver":"How far the EIS and decision overrun"},"solar":{"approval":[4.5,30],"service":[4.5,35],"driver":"Who holds the file before review starts"},"transmission":{"approval":[1.5,62],"service":[1.5,96],"driver":"Whether states site the line"},"offshore":{"approval":[5.5,20],"service":[5.5,22],"driver":"BOEM's wait for the NOI and the marine mammal rule"}};
+  const REPLAYS = [{"t":"solar","n":"Imperial Valley","v":0.3,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.3,"e":21.6,"d":2.3,"f":""},{"t":"solar","n":"Ivanpah","v":0.0,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.0,"e":21.0,"d":2.0,"f":""},{"t":"solar","n":"Calico","v":0.7,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.7,"e":21.6,"d":2.7,"f":""},{"t":"solar","n":"Lucerne Valley","v":0.0,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.0,"e":12.7,"d":2.0,"f":""},{"t":"solar","n":"Blythe","v":0.2,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.2,"e":8.9,"d":2.2,"f":""},{"t":"solar","n":"Genesis","v":0.5,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.5,"e":9.1,"d":2.5,"f":""},{"t":"solar","n":"Silver State","v":0.0,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.0,"e":14.4,"d":1.1,"f":""},{"t":"solar","n":"Amargosa Farm Road","v":0.0,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.0,"e":15.1,"d":1.0,"f":""},{"t":"solar","n":"Crescent Dunes","v":0.0,"p":false,"y":"2010","pre":0.0,"eis":0.0,"dec":0.0,"e":11.8,"d":1.2,"f":""},{"t":"solar","n":"Desert Sunlight","v":1.8,"p":false,"y":"2011","pre":0.0,"eis":0.0,"dec":1.8,"e":15.0,"d":3.8,"f":""},{"t":"solar","n":"Sonoran","v":0.0,"p":false,"y":"2011","pre":0.0,"eis":0.0,"dec":0.0,"e":27.4,"d":1.9,"f":""},{"t":"solar","n":"Desert Harvest","v":2.3,"p":false,"y":"2013","pre":0.0,"eis":0.0,"dec":2.3,"e":13.6,"d":4.3,"f":""},{"t":"solar","n":"McCoy","v":0.7,"p":false,"y":"2013","pre":0.0,"eis":0.0,"dec":0.7,"e":15.8,"d":2.7,"f":""},{"t":"solar","n":"Stateline","v":1.2,"p":false,"y":"2014","pre":0.0,"eis":0.0,"dec":1.2,"e":27.2,"d":3.2,"f":""},{"t":"solar","n":"Soda Mountain","v":11.0,"p":false,"y":"2016","pre":0.0,"eis":3.6,"dec":7.4,"e":31.6,"d":9.4,"f":""},{"t":"solar","n":"Desert Quartzite","v":28.4,"p":false,"y":"2020","pre":0.0,"eis":26.7,"dec":1.6,"e":54.7,"d":3.6,"f":"The developer amended its application during the review."},{"t":"solar","n":"Gemini","v":2.5,"p":false,"y":"2020","pre":0.0,"eis":0.0,"dec":2.5,"e":17.5,"d":4.5,"f":""},{"t":"solar","n":"Yellow Pine","v":5.3,"p":false,"y":"2020","pre":5.3,"eis":0.0,"dec":0.1,"e":27.1,"d":2.1,"f":""},{"t":"solar","n":"Libra","v":1.4,"p":false,"y":"2024","pre":1.4,"eis":0.0,"dec":0.0,"e":15.1,"d":1.5,"f":""},{"t":"solar","n":"Rough Hat Clark","v":18.7,"p":false,"y":"2025","pre":18.3,"eis":0.0,"dec":0.4,"e":24.4,"d":2.4,"f":""},{"t":"solar","n":"Jove","v":0.0,"p":false,"y":"2025","pre":0.0,"eis":0.0,"dec":0.0,"e":23.3,"d":1.6,"f":""},{"t":"wind","n":"Tule Wind","v":8.3,"p":false,"y":"2012","pre":0.0,"eis":0.0,"dec":8.3,"e":21.5,"d":10.3,"f":""},{"t":"wind","n":"Ocotillo Express","v":0.1,"p":false,"y":"2012","pre":0.0,"eis":0.0,"dec":0.1,"e":14.9,"d":2.1,"f":""},{"t":"wind","n":"Chokecherry and Sierra Madre","v":21.0,"p":false,"y":"2012","pre":0.0,"eis":19.7,"dec":1.4,"e":47.7,"d":3.4,"f":""},{"t":"wind","n":"Searchlight","v":20.9,"p":false,"y":"2013","pre":0.0,"eis":19.9,"dec":0.9,"e":47.9,"d":2.9,"f":""},{"t":"wind","n":"Alta East","v":1.2,"p":false,"y":"2013","pre":0.0,"eis":0.0,"dec":1.2,"e":19.1,"d":3.2,"f":""},{"t":"wind","n":"Mohave County","v":5.7,"p":false,"y":"2013","pre":0.0,"eis":5.7,"dec":0.0,"e":33.7,"d":1.4,"f":""},{"t":"wind","n":"Borderlands","v":3.2,"p":false,"y":"2020","pre":1.1,"eis":0.0,"dec":2.1,"e":17.0,"d":4.1,"f":""},{"t":"wind","n":"Lava Ridge","v":9.5,"p":false,"y":"2024","pre":0.0,"eis":5.6,"dec":3.9,"e":33.6,"d":5.9,"f":""},{"t":"transmission","n":"Mona to Oquirrh","v":9.7,"p":false,"y":"2011","pre":0.0,"eis":2.3,"dec":7.3,"e":30.3,"d":9.3,"f":""},{"t":"transmission","n":"Eldorado-Ivanpah","v":3.0,"p":false,"y":"2011","pre":0.0,"eis":0.0,"dec":3.0,"e":16.7,"d":5.0,"f":""},{"t":"transmission","n":"Sigurd to Red Butte","v":5.1,"p":false,"y":"2012","pre":0.0,"eis":5.0,"dec":0.1,"e":33.0,"d":2.1,"f":""},{"t":"transmission","n":"Gateway West","v":35.9,"p":false,"y":"2013","pre":0.0,"eis":31.3,"dec":4.6,"e":59.3,"d":6.6,"f":""},{"t":"transmission","n":"SunZia (2009)","v":37.9,"p":false,"y":"2015","pre":0.0,"eis":20.5,"dec":17.4,"e":48.5,"d":19.4,"f":""},{"t":"transmission","n":"SunZia (2021)","v":1.0,"p":false,"y":"2023","pre":0.0,"eis":0.0,"dec":1.0,"e":20.5,"d":3.0,"f":"Supplemental review for a route change."},{"t":"transmission","n":"Sun Valley to Morgan","v":3.9,"p":false,"y":"2014","pre":0.0,"eis":0.0,"dec":3.9,"e":27.3,"d":5.9,"f":""},{"t":"transmission","n":"TransWest Express","v":41.4,"p":false,"y":"2016","pre":0.0,"eis":23.8,"dec":17.5,"e":51.8,"d":19.5,"f":""},{"t":"transmission","n":"Southline","v":19.1,"p":false,"y":"2016","pre":0.0,"eis":15.1,"dec":4.0,"e":43.1,"d":6.0,"f":""},{"t":"transmission","n":"Gateway South","v":38.4,"p":false,"y":"2016","pre":0.0,"eis":33.4,"dec":5.0,"e":61.4,"d":7.0,"f":"The developer amended its application twice during the review."},{"t":"transmission","n":"Vantage to Pomona Heights","v":54.4,"p":false,"y":"2017","pre":0.0,"eis":53.5,"dec":0.9,"e":81.5,"d":2.9,"f":""},{"t":"transmission","n":"Boardman to Hemingway","v":80.2,"p":false,"y":"2017","pre":0.0,"eis":70.4,"dec":9.7,"e":98.4,"d":11.7,"f":"Counted from BLM's first NOI in 2008; BLM issued a second NOI in 2010."},{"t":"transmission","n":"Ten West Link","v":14.4,"p":false,"y":"2019","pre":0.0,"eis":13.7,"dec":0.7,"e":41.7,"d":2.7,"f":""},{"t":"transmission","n":"Greenlink West","v":0.9,"p":false,"y":"2024","pre":0.0,"eis":0.0,"dec":0.9,"e":25.4,"d":2.9,"f":""},{"t":"pipeline","n":"Rover Pipeline","v":3.9,"p":false,"y":"2017","pre":0.0,"eis":0.0,"dec":3.9,"e":20.6,"d":5.9,"f":""},{"t":"pipeline","n":"NEXUS Gas Transmission","v":6.5,"p":false,"y":"2017","pre":0.0,"eis":0.0,"dec":6.5,"e":19.8,"d":8.5,"f":""},{"t":"pipeline","n":"Mountain Valley Pipeline","v":1.4,"p":false,"y":"2017","pre":0.0,"eis":0.0,"dec":1.4,"e":26.1,"d":3.4,"f":""},{"t":"pipeline","n":"Atlantic Coast Pipeline","v":1.3,"p":false,"y":"2017","pre":0.0,"eis":0.7,"dec":0.5,"e":28.7,"d":2.5,"f":""},{"t":"pipeline","n":"PennEast Pipeline","v":7.2,"p":false,"y":"2018","pre":0.0,"eis":0.0,"dec":7.2,"e":26.8,"d":9.2,"f":""},{"t":"pipeline","n":"Constitution Pipeline","v":0.0,"p":false,"y":"2014","pre":0.0,"eis":0.0,"dec":0.0,"e":15.7,"d":1.1,"f":""},{"t":"pipeline","n":"Southeast Market Pipelines","v":0.0,"p":false,"y":"2016","pre":0.0,"eis":0.0,"dec":0.0,"e":21.9,"d":1.3,"f":""},{"t":"pipeline","n":"Atlantic Sunrise","v":1.3,"p":false,"y":"2017","pre":0.0,"eis":1.3,"dec":0.0,"e":29.3,"d":0.9,"f":""},{"t":"pipeline","n":"Mountaineer XPress","v":2.8,"p":false,"y":"2017","pre":0.0,"eis":0.0,"dec":2.8,"e":20.1,"d":4.8,"f":""},{"t":"pipeline","n":"Regional Energy Access Expansion","v":3.2,"p":false,"y":"2023","pre":0.0,"eis":0.0,"dec":3.2,"e":9.5,"d":5.2,"f":""},{"t":"pipeline","n":"MVP Southgate","v":1.9,"p":false,"y":"2020","pre":0.0,"eis":0.0,"dec":1.9,"e":18.4,"d":3.9,"f":""},{"t":"offshore","n":"Vineyard Wind 1","v":7.4,"p":false,"y":"2021","pre":0.0,"eis":7.4,"dec":0.0,"e":35.4,"d":1.9,"f":""},{"t":"offshore","n":"South Fork Wind","v":7.2,"p":false,"y":"2021","pre":0.0,"eis":6.0,"dec":1.1,"e":34.0,"d":3.1,"f":""},{"t":"offshore","n":"Ocean Wind 1","v":0.0,"p":false,"y":"2023","pre":0.0,"eis":0.0,"dec":0.0,"e":25.9,"d":1.2,"f":""},{"t":"offshore","n":"Coastal Virginia Offshore Wind","v":0.0,"p":false,"y":"2023","pre":0.0,"eis":0.0,"dec":0.0,"e":26.9,"d":1.0,"f":""},{"t":"offshore","n":"Revolution Wind","v":0.0,"p":false,"y":"2023","pre":0.0,"eis":0.0,"dec":0.0,"e":26.7,"d":1.0,"f":""},{"t":"offshore","n":"Empire Wind","v":0.2,"p":false,"y":"2023","pre":0.0,"eis":0.0,"dec":0.2,"e":26.7,"d":2.2,"f":""},{"t":"offshore","n":"Sunrise Wind","v":1.4,"p":false,"y":"2024","pre":0.0,"eis":0.0,"dec":1.4,"e":27.5,"d":3.4,"f":""},{"t":"offshore","n":"New England Wind","v":4.0,"p":false,"y":"2024","pre":0.0,"eis":4.0,"dec":0.0,"e":32.0,"d":1.0,"f":""},{"t":"offshore","n":"Atlantic Shores South","v":4.0,"p":false,"y":"2024","pre":0.0,"eis":4.0,"dec":0.0,"e":32.0,"d":1.0,"f":""},{"t":"offshore","n":"Maryland Offshore Wind","v":0.0,"p":false,"y":"2024","pre":0.0,"eis":0.0,"dec":0.0,"e":25.8,"d":1.1,"f":""},{"t":"offshore","n":"SouthCoast Wind","v":8.5,"p":false,"y":"2024","pre":0.0,"eis":8.5,"dec":0.0,"e":36.5,"d":1.1,"f":""},{"t":"solar","n":"Crimson","v":7.8,"p":false,"y":"2021","pre":0.0,"eis":7.2,"dec":0.6,"e":35.2,"d":2.6,"f":""},{"t":"solar","n":"Bonanza","v":11.5,"p":true,"y":"2026","pre":0.0,"eis":10.5,"dec":1.0,"e":38.5,"d":3.0,"f":""},{"t":"solar","n":"Mosey","v":45.0,"p":true,"y":"2028","pre":41.0,"eis":0.0,"dec":4.1,"e":16.6,"d":6.1,"f":""},{"t":"offshore","n":"Vineyard Mid-Atlantic","v":10.8,"p":true,"y":"2028","pre":0.0,"eis":10.8,"dec":0.0,"e":38.8,"d":1.6,"f":""}];
+  const WF_AXIS = { smooth: { max: 12, tick: 2 }, contested: { max: 96, tick: 12 } };
+
+  const state = { project: "pipeline", scenario: "smooth", regime: "current", measure: "approval" };
+  const MEASURE = { approval: "Federal approval", service: "In service" };
+  try { const h = (location.hash || "").replace("#", ""); if (PROJECTS[h]) state.project = h; } catch (e) {}
+
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+
+  function buildSeg(container, options, key) {
+    container.textContent = "";
+    Object.entries(options).forEach(([val, label]) => {
+      const b = el("button", null, label);
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(state[key] === val));
+      b.addEventListener("click", () => { state[key] = val; if (key === "project") { try { history.replaceState(null, "", "#" + val); } catch (e) {} } render(); });
+      container.appendChild(b);
+    });
+  }
+
+  function lastMs(rows, label) {
+    for (const row of rows) for (const m of (row.ms || [])) if (m.label === label) return m.at;
+    return null;
+  }
+  function buildStart(rows) {
+    const row = rows.find((x) => x.cat === "build");
+    return row ? row.bars[0].s : null;
+  }
+
+  // Tooltip
+  const tip = $("tip");
+  let tipShownAt = 0;
+  function showTip(row, bar, x, y, regime) {
+    tipShownAt = performance.now();
+    tip.textContent = "";
+    if (regime) tip.appendChild(el("div", "t-reg", REG[regime]));
+    const dur = bar.e - bar.s;
+    let range = `Months ${fmt(bar.s)}–${fmt(bar.e)} · ${fmt(dur)} months`;
+    if (bar.kind === "win" && dur >= 60) range = `From month ${fmt(bar.s)} · up to 6 years`;
+    tip.appendChild(el("div", "t-val", range));
+    const nm = el("div", "t-name"); const k = el("i"); k.style.background = `var(${CAT[row.cat].v})`; nm.appendChild(k); nm.appendChild(document.createTextNode(row.label)); tip.appendChild(nm);
+    if (bar.kind === "possible") tip.appendChild(el("div", "t-flag", "Possible, not counted"));
+    else if (row.assumed) tip.appendChild(el("div", "t-flag", "Includes an assumption"));
+    tip.appendChild(el("div", null, row.basis));
+    if (row.src && row.src.length) tip.appendChild(el("div", "t-src", "Source: " + row.src.map((s) => SRC[s].name).join("; ")));
+    placeTip(x, y);
+  }
+  function placeTip(x, y) {
+    tip.hidden = false;
+    const rc = tip.getBoundingClientRect();
+    const left = Math.min(x + 14, window.innerWidth - rc.width - 12);
+    let top = y + 16;
+    if (top + rc.height > window.innerHeight - 8) top = Math.max(8, y - rc.height - 12);
+    tip.style.left = Math.max(12, left) + "px";
+    tip.style.top = top + "px";
+  }
+  function hideTip() { tip.hidden = true; }
+
+  // ---------- Row alignment between regimes ----------
+  // Each row is assigned a step key from its label so the same step lines up in one row under both regimes.
+  const KEY_RULES = [
+    [/pre-filing/i, "pre"], [/sponsor's suit/i, "dlsuit"], [/secretary's office/i, "sec"], [/hold on later/i, "hold"],
+    [/further freeze/i, "freeze"], [/backstop/i, "backstop"], [/state siting/i, "state"], [/state coastal/i, "czma"],
+    [/EPA air/i, "air"], [/FAA/, "faa"], [/BSEE/, "bsee"],
+    [/stop-work/i, "stopwork"], [/reconsideration|reversal of the approval/i, "reopen"],
+    [/^appeal$/i, "appeal"], [/lawsuit|third-party|district court suit/i, "suit"],
+    [/possible (stop|remand|vacatur)/i, "pstop"], [/injunction/i, "injunction"],
+    [/work stopped|fixes the (permit|approval)|approval vacated/i, "remand"], [/marine mammal/i, "mmpa"],
+    [/eagle/i, "eagle"], [/\bESA\b/, "esa"], [/treatment plans/i, "nhpa2"], [/historic review|NHPA/i, "nhpa"],
+    [/water quality certification|§401/i, "401"], [/corps|nationwide permit|other federal permits|water permits/i, "corps"],
+    [/transmission line right-of-way/i, "line"], [/right-of-way grant/i, "row"], [/notices? to proceed|final plans?\b/i, "ntp"],
+    [/financing/i, "fin"], [/developer/i, "dev"], [/lease nomination/i, "lease"], [/exploration permits/i, "explore"],
+    [/exploration drilling/i, "drill"], [/development review/i, "ea"], [/geothermal drilling/i, "gdp"],
+    [/completeness review|application processing|review to (notice|NOI)|processing to (notice|NOI)|BOEM review/i, "noi"],
+    [/certificate|record of decision|protest|decision/i, "decision"], [/\bEIS\b|FERC review/i, "eis"],
+    [/window to sue/i, "window"], [/construction/i, "build"]
+  ];
+  function stepKey(label) { for (const [re, k] of KEY_RULES) if (re.test(label)) return k; return label; }
+  function keyed(rows) {
+    const seen = {}; return rows.map((row) => { let k = stepKey(row.label); seen[k] = (seen[k] || 0) + 1; if (seen[k] > 1) k += "#" + seen[k]; return { k, row }; });
+  }
+  // Merge: current-law order first; BAAJA-only steps slot in after the step that precedes them in the BAAJA list.
+  function mergeRows(cur, baaja) {
+    const kc = keyed(cur), kb = keyed(baaja);
+    const bmap = new Map(kb.map((x) => [x.k, x.row]));
+    const merged = kc.map((x) => ({ k: x.k, cur: x.row, baaja: bmap.get(x.k) || null }));
+    let pos = -1;
+    kb.forEach((x) => {
+      const i = merged.findIndex((m) => m.k === x.k);
+      if (i >= 0) { pos = i; return; }
+      pos += 1; merged.splice(pos, 0, { k: x.k, cur: null, baaja: x.row });
+    });
+    return merged;
+  }
+  const REG = { current: "Current law", baaja: "Under BAAJA", both: "Both" };
+
+  function addBar(tr, row, b, regime, lane, pct, max) {
+    const btn = el("button", "bar " + lane + (b.kind ? " " + b.kind : ""));
+    btn.type = "button";
+    btn.style.setProperty("--c", `var(${CAT[row.cat].v})`);
+    const left = pct(b.s); const right = pct(b.e);
+    btn.style.left = left + "%"; btn.style.width = Math.max(0.6, right - left) + "%";
+    if (b.e > max) { btn.classList.add("clipped"); if (lane !== "ghost") btn.appendChild(el("span", "clip", `to month ${fmt(b.e)} →`)); }
+    btn.setAttribute("aria-label", `${REG[regime]}, ${row.label}: months ${fmt(b.s)} to ${fmt(b.e)}${b.kind === "possible" ? ", possible, not counted" : ""}. ${row.basis}`);
+    const show = (x, y) => showTip(row, b, x, y, regime);
+    btn.addEventListener("pointermove", (ev) => show(ev.clientX, ev.clientY));
+    btn.addEventListener("pointerleave", hideTip);
+    btn.addEventListener("focus", () => { const rc = btn.getBoundingClientRect(); show(rc.left, rc.bottom); });
+    btn.addEventListener("blur", hideTip);
+    btn.addEventListener("click", (ev) => { ev.stopPropagation(); show(ev.clientX || btn.getBoundingClientRect().left, ev.clientY || btn.getBoundingClientRect().bottom); });
+    tr.appendChild(btn);
+  }
+  function addMs(tr, m, regime, lane, pct, text) {
+    const d = el("span", "ms " + lane + " " + regime); d.style.left = pct(m.at) + "%"; tr.appendChild(d);
+    if (text == null) return;
+    const l = el("span", "ms-lab", text);
+    l.style.left = pct(m.at) + "%"; l.style.marginLeft = "10px"; l.dataset.at = String(pct(m.at));
+    tr.appendChild(l);
+  }
+
+  function renderGantt(container, sc, max, tick, regime) {
+    container.textContent = "";
+    const pct = (m) => Math.max(0, Math.min(100, (m / max) * 100));
+    const ticks = []; for (let t = 0; t <= max; t += tick) ticks.push(t);
+    const both = regime === "both";
+    const active = both ? "current" : regime, other = active === "current" ? "baaja" : "current";
+    const F = { current: "cur", baaja: "baaja" };
+
+    const ax = el("div", "row axis-row");
+    ax.appendChild(el("div", "lab axis-cap", "Month"));
+    const at = el("div", "track");
+    ticks.forEach((t, i) => { const tk = el("span", "tick" + (i === 0 ? " first" : "") + (i % 2 ? " minor" : ""), String(t)); tk.style.left = pct(t) + "%"; at.appendChild(tk); });
+    ax.appendChild(at); container.appendChild(ax);
+
+    mergeRows(sc.current, sc.baaja).forEach((m) => {
+      const main = m[F[active]] || m[F[other]];
+      const rw = el("div", "row" + (both ? " two" : "")); rw.setAttribute("role", "listitem");
+      const lab = el("div", "lab"); const sw = el("span", "sw"); sw.style.background = `var(${CAT[main.cat].v})`;
+      if (main.bars.every((b) => b.kind)) { sw.style.background = "transparent"; sw.style.boxShadow = `inset 0 0 0 1px var(${CAT[main.cat].v})`; }
+      lab.appendChild(sw);
+      const txt = el("span", null, main.label);
+      if (!m.cur || !m.baaja) { txt.appendChild(document.createTextNode(" ")); txt.appendChild(el("em", "only", m.cur ? "current law only" : "BAAJA only")); }
+      else if (!both) {
+        // End-of-step change: negative means the step ends sooner under BAAJA.
+        const end = (row) => Math.max(...row.bars.filter((b) => !b.kind).map((b) => b.e));
+        const d = end(m.baaja) - end(m.cur);
+        if (isFinite(d) && Math.abs(d) >= 0.5) { const chip = el("span", "delta" + (d < 0 ? " sooner" : " later"), (d < 0 ? "−" : "+") + fmt(Math.abs(d)) + " mo"); chip.title = "Change in when this step ends under BAAJA"; txt.appendChild(document.createTextNode(" ")); txt.appendChild(chip); }
+      }
+      lab.appendChild(txt); rw.appendChild(lab);
+      const tr = el("div", "track");
+      ticks.forEach((t) => { const g = el("span", "gl"); g.style.left = pct(t) + "%"; tr.appendChild(g); });
+      if (both) {
+        if (m.cur) m.cur.bars.forEach((b) => addBar(tr, m.cur, b, "current", "lane-a", pct, max));
+        if (m.baaja) m.baaja.bars.forEach((b) => addBar(tr, m.baaja, b, "baaja", "lane-b", pct, max));
+        const mc = (m.cur && m.cur.ms || [])[0], mb = (m.baaja && m.baaja.ms || [])[0];
+        if (mc) addMs(tr, mc, "current", "lane-a", pct, mb ? null : `${mc.label} · ${fmt(mc.at)}`);
+        if (mb) addMs(tr, mb, "baaja", "lane-b", pct, mc ? `${mb.label} · ${fmt(mc.at)} → ${fmt(mb.at)}` : `${mb.label} · ${fmt(mb.at)}`);
+      } else {
+        const ro = m[F[other]], ra = m[F[active]];
+        if (ro) ro.bars.forEach((b) => addBar(tr, ro, b, other, "ghost", pct, max));
+        if (ra) ra.bars.forEach((b) => addBar(tr, ra, b, active, "main", pct, max));
+        const mo = (ro && ro.ms || [])[0], ma = (ra && ra.ms || [])[0];
+        if (mo) addMs(tr, mo, other, "ghost", pct, null);
+        if (ma) addMs(tr, ma, active, "main", pct, `${ma.label} · ${fmt(ma.at)}`);
+      }
+      rw.appendChild(tr); container.appendChild(rw);
+      tr.querySelectorAll(".ms-lab").forEach((l) => {
+        if (l.getBoundingClientRect().right > tr.getBoundingClientRect().right) {
+          l.style.left = ""; l.style.marginLeft = "";
+          l.style.right = (100 - Number(l.dataset.at)) + "%"; l.style.marginRight = "10px";
+        }
+      });
+    });
+  }
+
+  function renderSummary(proj, sc) {
+    const cur = sc.current, b = sc.baaja;
+    const ci = lastMs(cur, proj.end), bi = lastMs(b, proj.end);
+    const cs = buildStart(cur), bs = buildStart(b);
+    const diff = ci - bi;
+    const s = $("summary"); s.textContent = "";
+    const tile = (k, v, unit, sub) => { const t = el("div", "stat"); t.appendChild(el("div", "k", k)); const vv = el("div", "v", v + " "); vv.appendChild(el("small", null, unit)); t.appendChild(vv); if (sub) t.appendChild(el("div", "s", sub)); return t; };
+    s.appendChild(tile(`${proj.end}, current law`, fmt(ci), "months", `Construction starts at month ${fmt(cs)}`));
+    s.appendChild(tile(`${proj.end}, under BAAJA`, fmt(bi), "months", `Construction starts at month ${fmt(bs)}` + (sc.extra ? `. ${sc.extra}.` : "")));
+    const yrs = diff / 12;
+    s.appendChild(tile("Difference", fmt(diff), "months sooner", diff >= 12 ? `About ${yrs.toFixed(1)} years` : (diff < 2 ? "Effectively the same schedule" : "")));
+    $("takeaway").textContent = sc.short;
+    $("archetype").textContent = proj.brief;
+    $("desc-long").textContent = proj.desc;
+    $("takeaway-long").textContent = sc.takeaway;
+  }
+
+  function renderLegend(sc) {
+    const used = new Set([...sc.current, ...sc.baaja].map((x) => x.cat));
+    const lg = $("legend"); lg.textContent = "";
+    Object.entries(CAT).forEach(([k, c]) => {
+      if (!used.has(k)) return;
+      const sp = el("span"); const i = el("i"); i.style.background = `var(${c.v})`; sp.appendChild(i); sp.appendChild(document.createTextNode(c.name)); lg.appendChild(sp);
+    });
+    const w = el("span"); const wi = el("i", "win"); w.appendChild(wi); w.appendChild(document.createTextNode("Open window or possible delay")); lg.appendChild(w);
+    const m = el("span"); const mi = el("i"); mi.style.cssText = "width:9px;height:9px;transform:rotate(45deg);background:var(--ink);border-radius:1px"; m.appendChild(mi); m.appendChild(document.createTextNode("Milestone")); lg.appendChild(m);
+    const lane = el("span", "lanekey");
+    if (state.regime === "both") { lane.appendChild(el("i", "la")); lane.appendChild(document.createTextNode("Top lane: current law")); lane.appendChild(el("i", "lb")); lane.appendChild(document.createTextNode("Bottom lane: under BAAJA")); }
+    else { lane.appendChild(el("i", "lg")); lane.appendChild(document.createTextNode(state.regime === "current" ? "Thin outline: the same step under BAAJA" : "Thin outline: the same step under current law")); }
+    lg.appendChild(lane);
+  }
+
+  function renderTable(sc) {
+    const t = $("table"); t.textContent = "";
+    const thead = el("thead"); const hr = el("tr");
+    ["Regime", "Step", "Months", "Basis"].forEach((h) => hr.appendChild(el("th", null, h)));
+    thead.appendChild(hr); t.appendChild(thead);
+    const tb = el("tbody");
+    [["Current law", sc.current], ["Under BAAJA", sc.baaja]].forEach(([name, rows]) => {
+      rows.forEach((row) => {
+        const tr = el("tr");
+        tr.appendChild(el("td", null, name));
+        tr.appendChild(el("td", null, row.label + (row.assumed ? " (assumption)" : "")));
+        tr.appendChild(el("td", "num", row.bars.map((b) => `${fmt(b.s)}–${fmt(b.e)}${b.kind === "possible" ? " (possible)" : ""}`).join(", ")));
+        tr.appendChild(el("td", null, row.basis));
+        tb.appendChild(tr);
+      });
+    });
+    t.appendChild(tb);
+  }
+
+  function renderSources(proj) {
+    const used = new Set(["bill"]);
+    ["smooth", "contested"].forEach((k) => ["current", "baaja"].forEach((p) => proj.data[k][p].forEach((row) => row.src.forEach((s) => used.add(s)))));
+    const ul = $("sources"); ul.textContent = "";
+    Object.entries(SRC).forEach(([k, s]) => {
+      if (!used.has(k)) return;
+      const li = el("li"); const a = el("a", null, s.name); a.href = s.url; a.target = "_blank"; a.rel = "noopener"; li.appendChild(a); ul.appendChild(li);
+    });
+  }
+
+  // ---------- Waterfall: months saved by each provision ----------
+  const months = (n) => `${fmt(n)} month${n === 1 ? "" : "s"}`;
+  function wfBar(tr, s, e, color, label, aria, onShow) {
+    const btn = el("button", "bar main");
+    btn.type = "button";
+    btn.style.setProperty("--c", color);
+    btn.style.left = s + "%"; btn.style.width = Math.max(0.6, e - s) + "%";
+    btn.setAttribute("aria-label", aria);
+    btn.addEventListener("pointermove", (ev) => onShow(ev.clientX, ev.clientY));
+    btn.addEventListener("pointerleave", hideTip);
+    btn.addEventListener("focus", () => { const rc = btn.getBoundingClientRect(); onShow(rc.left, rc.bottom); });
+    btn.addEventListener("blur", hideTip);
+    btn.addEventListener("click", (ev) => { ev.stopPropagation(); onShow(ev.clientX || btn.getBoundingClientRect().left, ev.clientY || btn.getBoundingClientRect().bottom); });
+    tr.appendChild(btn);
+  }
+  function renderWaterfall(proj) {
+    const d = WF[state.project][state.scenario];
+    const { max, tick } = WF_AXIS[state.scenario];
+    const pct = (m) => Math.max(0, Math.min(100, (m / max) * 100));
+    const ticks = []; for (let t = 0; t <= max; t += tick) ticks.push(t);
+    const box = $("wf"); box.textContent = "";
+    $("h-wf").textContent = `${proj.name}: where the months come from`;
+    $("meta-wf").textContent = `${SCEN[state.scenario]} · by provision`;
+
+    const ax = el("div", "row axis-row");
+    ax.appendChild(el("div", "lab axis-cap", "Months saved"));
+    const at = el("div", "track");
+    ticks.forEach((t, i) => { const tk = el("span", "tick" + (i === 0 ? " first" : "") + (i % 2 ? " minor" : ""), String(t)); tk.style.left = pct(t) + "%"; at.appendChild(tk); });
+    ax.appendChild(at); ax.appendChild(el("div")); box.appendChild(ax);
+
+    const addRow = (cls, labText, secText, s, e, color, valText, aria, onShow) => {
+      const rw = el("div", "row" + (cls ? " " + cls : "")); rw.setAttribute("role", "listitem");
+      const lab = el("div", "lab"); const t = el("span", null, labText); lab.appendChild(t);
+      if (secText) lab.appendChild(el("span", "sec", secText));
+      rw.appendChild(lab);
+      const tr = el("div", "track");
+      ticks.forEach((tk) => { const g = el("span", "gl"); g.style.left = pct(tk) + "%"; tr.appendChild(g); });
+      wfBar(tr, pct(s), pct(e), color, labText, aria, onShow);
+      rw.appendChild(tr); rw.appendChild(el("div", "val", valText)); box.appendChild(rw);
+    };
+    let cum = 0;
+    d.items.forEach((it) => {
+      const show = (x, y) => {
+        tipShownAt = performance.now(); tip.textContent = "";
+        tip.appendChild(el("div", "t-val", `${months(it.months)} sooner`));
+        const nm = el("div", "t-name"); const k = el("i"); k.style.background = "var(--accent)"; nm.appendChild(k); nm.appendChild(document.createTextNode(`${it.label} (${it.sec})`)); tip.appendChild(nm);
+        tip.appendChild(el("div", null, it.note));
+        tip.appendChild(el("div", "t-src", `Saves ${months(it.alone)} if it were the only provision, ${months(it.last)} if added after all the others.`));
+        placeTip(x, y);
+      };
+      addRow("", it.label, it.sec, cum, cum + it.months, "var(--accent)", `${fmt(it.months)} mo`,
+        `${it.label}, ${it.sec}: ${months(it.months)} sooner. ${it.note} Alone ${months(it.alone)}; added last ${months(it.last)}.`, show);
+      cum += it.months;
+    });
+    const showTotal = (x, y) => {
+      tipShownAt = performance.now(); tip.textContent = "";
+      tip.appendChild(el("div", "t-val", `${months(d.total)} sooner`));
+      tip.appendChild(el("div", null, `${proj.end} at month ${fmt(d.current)} under current law and ${fmt(d.baaja)} under BAAJA.`));
+      if (d.overlap) tip.appendChild(el("div", "t-src", d.overlap));
+      placeTip(x, y);
+    };
+    addRow("total", "Total", null, 0, d.total, "var(--ink-2)", `${fmt(d.total)} mo`, `Total: ${months(d.total)} sooner, month ${fmt(d.current)} to ${fmt(d.baaja)}.`, showTotal);
+
+    const nt = $("wf-notes"); nt.textContent = "";
+    if (d.zshort) nt.appendChild(el("p", null, d.zshort));
+    $("wf-overlap").textContent = [d.overlap, d.zero].filter(Boolean).join(" ");
+    renderWfTable(proj, d);
+  }
+  function renderWfTable(proj, d) {
+    const t = $("wf-table"); t.textContent = "";
+    const thead = el("thead"); const hr = el("tr");
+    ["Provision", "Months sooner", "Alone", "Added last", "How"].forEach((h) => hr.appendChild(el("th", null, h)));
+    thead.appendChild(hr); t.appendChild(thead);
+    const tb = el("tbody");
+    d.items.forEach((it) => {
+      const tr = el("tr");
+      tr.appendChild(el("td", null, `${it.label} (${it.sec})`));
+      [it.months, it.alone, it.last].forEach((v) => tr.appendChild(el("td", "num", fmt(v))));
+      tr.appendChild(el("td", null, it.note));
+      tb.appendChild(tr);
+    });
+    const tr = el("tr"); tr.appendChild(el("td", null, "Total")); tr.appendChild(el("td", "num", fmt(d.total))); tr.appendChild(el("td")); tr.appendChild(el("td"));
+    tr.appendChild(el("td", null, `${proj.end} at month ${fmt(d.current)} under current law and ${fmt(d.baaja)} under BAAJA.`));
+    tb.appendChild(tr); t.appendChild(tb);
+  }
+
+  // ---------- Range chart: months sooner, model projects and real-project replays ----------
+  const RMAX = 96, RTICK = 12, LANES = [0, -9, 9, -17, 17];
+  function rTip(lines, x, y) {
+    tipShownAt = performance.now(); tip.textContent = "";
+    lines.forEach(([cls, txt]) => { if (txt) tip.appendChild(el("div", cls, txt)); });
+    placeTip(x, y);
+  }
+  function rBind(node, lines) {
+    const show = (x, y) => rTip(lines, x, y);
+    node.addEventListener("pointermove", (ev) => show(ev.clientX, ev.clientY));
+    node.addEventListener("pointerleave", hideTip);
+    node.addEventListener("focus", () => { const rc = node.getBoundingClientRect(); show(rc.left, rc.bottom); });
+    node.addEventListener("blur", hideTip);
+    node.addEventListener("click", (ev) => { ev.stopPropagation(); const rc = node.getBoundingClientRect(); show(ev.clientX || rc.left, ev.clientY || rc.bottom); });
+  }
+  function renderRange() {
+    const box = $("range"); box.textContent = "";
+    const pct = (m) => Math.max(0, Math.min(100, (m / RMAX) * 100));
+    const ticks = []; for (let t = 0; t <= RMAX; t += RTICK) ticks.push(t);
+    const approval = state.measure === "approval";
+    const ax = el("div", "row axis-row");
+    ax.appendChild(el("div", "lab axis-cap", "Months sooner"));
+    const at = el("div", "track");
+    ticks.forEach((t, i) => { const tk = el("span", "tick" + (i === 0 ? " first" : "") + (i % 2 ? " minor" : ""), String(t)); tk.style.left = pct(t) + "%"; at.appendChild(tk); });
+    ax.appendChild(at); ax.appendChild(el("div")); box.appendChild(ax);
+    Object.entries(PROJECTS).forEach(([key, proj]) => {
+      const R = RANGE[key]; const [lo, hi] = R[state.measure];
+      const endLabel = approval ? "to federal approval" : (key === "offshore" ? "to first power" : "to entering service");
+      const rw = el("div", "row"); rw.setAttribute("role", "listitem");
+      const lab = el("div", "lab");
+      const nb = el("button", null, proj.name); nb.type = "button";
+      nb.setAttribute("aria-label", `${proj.name}: open its timeline`);
+      nb.addEventListener("click", () => { state.project = key; try { history.replaceState(null, "", "#" + key); } catch (e) {} render(); const g = $("h-chart"); if (g) g.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      lab.appendChild(nb); lab.appendChild(el("span", "drv", R.driver)); rw.appendChild(lab);
+      const tr = el("div", "track");
+      ticks.forEach((t) => { const g = el("span", "gl"); g.style.left = pct(t) + "%"; tr.appendChild(g); });
+      const reps = REPLAYS.filter((r) => r.t === key);
+      if (approval) {
+        const lastAt = LANES.map(() => -1e9);
+        reps.slice().sort((a, b) => a.v - b.v).forEach((r) => {
+          let lane = LANES.findIndex((_, i) => r.v - lastAt[i] >= 1.4);
+          if (lane < 0) lane = lastAt.indexOf(Math.min(...lastAt));
+          lastAt[lane] = r.v;
+          const dt = el("button", "rdot" + (r.p ? " pend" : "")); dt.type = "button";
+          dt.style.left = pct(r.v) + "%"; dt.style.top = (26 + LANES[lane]) + "px";
+          const parts = [];
+          if (r.pre) parts.push(`${fmt(r.pre)} before review`);
+          if (r.eis) parts.push(`${fmt(r.eis)} on the EIS`);
+          if (r.dec) parts.push(`${fmt(r.dec)} on the decision`);
+          dt.setAttribute("aria-label", `${r.n}: ${fmt(r.v)} months sooner to the federal decision${r.p ? ", on its current schedule" : ""}`);
+          rBind(dt, [["t-val", `${fmt(r.v)} months sooner`], ["t-name", `${r.n} · ${r.p ? "scheduled for " + r.y : "decided " + r.y}`],
+            [null, parts.length ? "Months saved: " + parts.join(", ") + "." : "Its review already fit within the bill's limits."],
+            ["t-src", `EIS ${fmt(r.e)} months from NOI; decision ${fmt(r.d)} months after the final EIS.` + (r.f ? " " + r.f : "")]]);
+          tr.appendChild(dt);
+        });
+      }
+      if (hi > lo) { const sp = el("span", "rspan"); sp.style.left = pct(lo) + "%"; sp.style.width = (pct(hi) - pct(lo)) + "%"; tr.appendChild(sp); }
+      [["lo", lo, SCEN.smooth], ["hi", hi, SCEN.contested]].forEach(([cls, v, nm]) => {
+        if (cls === "lo" && hi === lo) return;
+        const b = el("button", "rpt " + cls); b.type = "button"; b.style.left = pct(v) + "%";
+        b.setAttribute("aria-label", `${proj.name}, model project, ${nm}: ${fmt(v)} months sooner ${endLabel}`);
+        rBind(b, [["t-val", `${fmt(v)} months sooner`], ["t-name", `${proj.name} model project · ${hi === lo ? "both scenarios" : nm}`], [null, `Months sooner ${endLabel} under BAAJA.`]]);
+        tr.appendChild(b);
+      });
+      rw.appendChild(tr);
+      const val = el("div", "val");
+      val.appendChild(el("div", "r", hi === lo ? `${fmt(lo)} mo` : `${fmt(lo)} to ${fmt(hi)} mo`));
+      if (approval && reps.length) { const med = reps.map((r) => r.v).sort((a, b) => a - b); const m = med.length % 2 ? med[(med.length - 1) / 2] : (med[med.length / 2 - 1] + med[med.length / 2]) / 2; val.appendChild(el("div", "m", `${reps.length} real · median ${fmt(Math.round(m * 10) / 10)}`)); }
+      else if (approval) val.appendChild(el("div", "m", "no real projects"));
+      rw.appendChild(val); box.appendChild(rw);
+    });
+    $("range-note").textContent = approval
+      ? "Dots apply the bill's limits to each real project's recorded dates. Method in Assumptions and data."
+      : "Real projects are shown for federal approval only.";
+  }
+  function renderRangeLegend() {
+    const lg = $("range-legend"); lg.textContent = "";
+    [["k-lo", "Deadlines met"], ["k-hi", "Delays and challenges"], ["k-dot", "Real project"], ["k-pend", "Real project still under review"]].forEach(([c, t]) => {
+      if (state.measure !== "approval" && c.startsWith("k-d") || state.measure !== "approval" && c === "k-pend") return;
+      const sp = el("span"); sp.appendChild(el("i", c)); sp.appendChild(document.createTextNode(t)); lg.appendChild(sp);
+    });
+  }
+  function renderReplayTable() {
+    const t = $("replay-table"); t.textContent = "";
+    const thead = el("thead"); const hr = el("tr");
+    ["Project", "Type", "Decision", "Months sooner", "EIS", "Decision step", "Before review", "Note"].forEach((h) => hr.appendChild(el("th", null, h)));
+    thead.appendChild(hr); t.appendChild(thead);
+    const tb = el("tbody");
+    const order = Object.keys(PROJECTS);
+    REPLAYS.slice().sort((a, b) => order.indexOf(a.t) - order.indexOf(b.t) || b.v - a.v).forEach((r) => {
+      const tr = el("tr");
+      tr.appendChild(el("td", null, r.n)); tr.appendChild(el("td", null, PROJECTS[r.t].name));
+      tr.appendChild(el("td", "num", r.p ? `${r.y} (scheduled)` : r.y));
+      [r.v, r.eis, r.dec, r.pre].forEach((v) => tr.appendChild(el("td", "num", fmt(v))));
+      tr.appendChild(el("td", null, r.f || ""));
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb);
+  }
+  function setTab(name, focus) {
+    ["charts", "data"].forEach((k) => {
+      const on = k === name; const tb = $("tab-" + k);
+      tb.setAttribute("aria-selected", String(on)); tb.tabIndex = on ? 0 : -1;
+      $("pane-" + k).hidden = !on;
+    });
+    if (focus) $("tab-" + name).focus();
+    hideTip();
+  }
+  ["charts", "data"].forEach((k, i, arr) => {
+    const tb = $("tab-" + k);
+    tb.addEventListener("click", () => setTab(k));
+    tb.addEventListener("keydown", (ev) => { if (ev.key === "ArrowRight" || ev.key === "ArrowLeft") { ev.preventDefault(); setTab(arr[(i + 1) % 2], true); } });
+  });
+
+  function render() {
+    const projOpts = Object.fromEntries(Object.entries(PROJECTS).map(([k, v]) => [k, v.name]));
+    buildSeg($("seg-project"), projOpts, "project");
+    buildSeg($("seg-project-2"), projOpts, "project");
+    buildSeg($("seg-scenario"), SCEN, "scenario");
+    buildSeg($("seg-scenario-2"), SCEN, "scenario");
+    buildSeg($("seg-regime"), REG, "regime");
+    buildSeg($("seg-measure"), MEASURE, "measure");
+    renderRangeLegend();
+    renderRange();
+    const proj = PROJECTS[state.project];
+    const sc = proj.data[state.scenario];
+    const max = sc.max || proj.max, tick = sc.tick || proj.tick;
+    renderSummary(proj, sc);
+    renderLegend(sc);
+    renderGantt($("g-chart"), sc, max, tick, state.regime);
+    $("h-chart").textContent = `${proj.name}: ` + ({ current: "current law", baaja: "under BAAJA", both: "current law and BAAJA" })[state.regime];
+    $("meta-chart").textContent = proj.axis;
+    renderWaterfall(proj);
+    renderTable(sc);
+    renderSources(proj);
+    $("h-steps").textContent = `Steps and assumptions: ${proj.name}, ${SCEN[state.scenario]}`;
+    $("h-sources").textContent = `Sources: ${proj.name}`;
+    hideTip();
+  }
+  renderReplayTable();
+
+  render();
+  // Focusing or tapping a bar can scroll it into view; ignore that scroll so keyboard users keep the tooltip.
+  window.addEventListener("scroll", () => { if (performance.now() - tipShownAt > 400) hideTip(); }, { passive: true });
+  document.addEventListener("pointerdown", (ev) => { if (!ev.target.closest(".bar")) hideTip(); });
+  let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(render, 150); });
+  window.addEventListener("hashchange", () => { const h = (location.hash || "").replace("#", ""); if (PROJECTS[h] && h !== state.project) { state.project = h; render(); } });
+})();
+</script>
+
+</body>
+</html>
